@@ -23,10 +23,10 @@ public class CSVWriter {
 		// 101, 양파링, 2000\n
 		// 102, 홈런볼, 3000\n
 		
-		List<String> header = Arrays.asList("제품번호", "제품명", "가격");
-		List<String> product1 = Arrays.asList("100", "새우깡", "1500");
-		List<String> product2 = Arrays.asList("101", "양파링", "2000");
-		List<String> product3 = Arrays.asList("102", "홈런볼", "3000");
+		List<String> header = Arrays.asList("제품번호","제품명","가격");
+		List<String> product1 = Arrays.asList("100","새우깡","1500");
+		List<String> product2 = Arrays.asList("101","양파링","2000");
+		List<String> product3 = Arrays.asList("102","홈런볼","3000");
 		
 		List<List<String>> list = Arrays.asList(header, product1, product2, product3);
 		
