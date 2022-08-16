@@ -21,12 +21,6 @@ public class Main {
 		
 		// 걸린 시간 출력하기
 		
-		// timestemp1
-		// while ((c=fe.read()) != -1) {
-		// fw.write(c); }
-		// timestemp2
-		// timestemp1 - timestemp2
-		
 		File src = new File ("C:\\storage", "prac1.txt"); //* 소스파일 : src
 		File cpy = new File ("C:\\storage", "prac1_copy.txt"); //* 카피할 파일: cpy
 		

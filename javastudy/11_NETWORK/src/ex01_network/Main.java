@@ -5,9 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
 
@@ -20,7 +24,7 @@ public class Main {
 		// 2. 정형화된 자원의 경로
 		// 3. 웹 주소를 의미
 		// 4. 구성
-		//	프로토콜 ://    호스트      / 서버 경로  ? 파라미터=값 & 파라미터=값 ...
+		//	프로토콜 :// 호스트:포트번호/ 서버 경로  ? 파라미터=값 & 파라미터=값 ...
 		// 		https://search.naver.com/searcn.naver? where=nexearch&sm=yop_hty& ....
 		//	 1) https:// secure http, 하이퍼텍스트 전송 프로토콜(통신규약)
 		// 	 2) 호스트 : 서버주소
@@ -63,17 +67,17 @@ public class Main {
 			HttpURLConnection con = (HttpURLConnection)url.openConnection(); //* 다운캐스팅
 			
 			// HTTP 응답 코드
-			// 1. 200 : 정상
+			// 1. 200 : 정상	// if ( con.getResponseCode() == HttpURLConnection.HTTP_OK )  응답코드가 200이라면~
 			// 2. 40X : 요청이 잘못됨 (사용자 잘못)
 			// 3. 50X : 서버 오류
 			System.out.println("=== openConnection 메소드를 사용하여 활용할 수 있는 예 ===");
 			
-			System.out.println("응답코드 : " + con.getResponseCode()); // 요청★★
+			System.out.println("응답코드 : " + con.getResponseCode()); // 응답★★
 			System.out.println("정상 : " + HttpURLConnection.HTTP_OK);
 			System.out.println("Not Found : " + HttpURLConnection.HTTP_NOT_FOUND);
 			System.out.println("Internal Error : " + HttpURLConnection.HTTP_INTERNAL_ERROR);
 			System.out.println("컨텐트 타입 : " + con.getContentType());
-			System.out.println("요청 방식 : " + con.getRequestMethod()); // 응답★★
+			System.out.println("요청 방식 : " + con.getRequestMethod()); // 요청★★
 			
 			//* 접속 종료(해제)
 			con.disconnect(); // 생략 가능
@@ -95,9 +99,10 @@ public class Main {
 			
 			// 바이트 입력 스트림
 			InputStream in = con.getInputStream(); //* InputStream > 바이트 스트림
-			
 			// 문자 입력 스트림으로 변환
 			InputStreamReader reader = new InputStreamReader(in);
+			//* 바이트입력 + 문자입력을 1줄로
+			//InputStreamReader reader = new InputStreamReader(con.getInputStream());
 			
 			// 모두 읽어서 StringBuilder에 저장
 			StringBuilder sb = new StringBuilder();
@@ -126,8 +131,35 @@ public class Main {
 		}
 	}
 	
+	public static void m4() {
+		System.out.println("=== URLEncoder.encode() 예외 : UnsupportedEncodingException ===");
+		System.out.println("=== 언더바(_)는 인코딩해도 언더바(_)로 출력된다. ===");
+		
+		// 인코딩 : UTF-8 방식으로 암호화
+		// 디코딩 : UTF-8 방식으로 복호화
+		// 원본데이터 → 인코딩 → 전송 → 디코딩 → 원본데이터
+	
+		
+		try {
+			// 원본데이터
+			String str = "한글 english 12345 !@#$+_";
+			
+			// 인코딩
+			String encode = URLEncoder.encode(str, "UTF-8");
+			System.out.println(encode);
+			
+			// 디코딩
+			String decode = URLDecoder.decode(encode, StandardCharsets.UTF_8);
+			System.out.println(decode);
+					
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
-		m1();
+		m4();
 	}
 
 }
