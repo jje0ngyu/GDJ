@@ -2,7 +2,6 @@ package ex04_socket;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -39,7 +38,7 @@ public class ClientMain {
 			
 			// 입출력 스트림 종료
 			out.close();
-			in.close();
+			in.close();  //* InputStream 을 먼저 사용하였으므로, 가장 나중에 닫아준다.
 			sc.close();
 			
 		} catch (UnknownHostException e) { e.printStackTrace(); 
