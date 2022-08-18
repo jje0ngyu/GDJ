@@ -16,8 +16,6 @@ public class Main {
 		// C:\\storage 에 sfc_web_map.xml 을 저장
 		
 		try {
-			File dir = new File ("C:\\storage");
-			if  (dir.exists() == false)  dir.mkdirs(); 
 			
 			// 접속
 			String apiURL = "https://kma.go.kr/XML/weather/sfc_web_map.xml";
@@ -32,8 +30,8 @@ public class Main {
 			
 			// 바이트 입력 스트림 → 문자 입력 스트림 → 버퍼 추가
 			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-					
-			File file = new File ("C:\\storage", "sfc_web_map.xml");
+			
+			File file = new File("C:\\storage", "sfc_web_map.xml");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			
 			// readLine() 메소드를 이용한 복사

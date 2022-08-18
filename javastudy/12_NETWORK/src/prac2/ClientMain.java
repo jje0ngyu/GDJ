@@ -17,36 +17,29 @@ public class ClientMain {
 		
 		try {
 			
-			//* 서버와 소켓 연결
 			socket = new Socket();
 			socket.connect(new InetSocketAddress("localhost", 9090));
 			
-			//* 메세지 입력
-			sc = new Scanner(System.in);
-			
-			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			
-			//* Client() 메소드 동작
 			Client client = new Client(socket);
 			client.start();
+
+			sc = new Scanner(System.in);
+			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			
-			//* 대화 종료할 때까지 반복
 			while(true) {
-				System.out.println(">>> ");
-				String message = sc.nextLine();
-				if(message.equalsIgnoreCase("exit")) {
-					break;
-				}
-				out.write(message);
+				String message = sc.nextLine();  // 채팅내용입력
+				out.write(message + "\n");  // Client.java의 BufferedReader in으로 전달
 				out.flush();
 			}
-		} catch (IOException e) {
+			
+		} catch(IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (out != null) out.close();
-				if (socket.isClosed() == false) socket.close();
-			} catch (IOException e) {
+				if(out != null) {
+					out.close();
+				}
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
 		}
