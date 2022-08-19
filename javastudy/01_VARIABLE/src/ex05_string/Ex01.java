@@ -11,6 +11,7 @@ public class Ex01 {
 		String str2 = 100 + "번지";
 		String str3 = 1 + 1 + "행사";
 		
+		if (str1.equals(str3))
 		System.out.println(str1);
 		System.out.println(str2);
 		System.out.println(str3);
