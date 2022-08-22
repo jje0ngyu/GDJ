@@ -1,0 +1,1 @@
+Movie [movieCd=20208446, movieNm=외계+인 1부, openDt=2022-07-20, salesAcc=15891443949, audiAcc=1525155]

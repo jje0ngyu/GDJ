@@ -1,6 +1,11 @@
 package prac3;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,9 +58,21 @@ public class ParseMain {
 			e.printStackTrace();
 		}
 		
+		StringBuilder sb = new StringBuilder();
+		File file2 = new File ("C:\\storage", "Moive.txt");
 		for (Movie movie : movies) {
-			System.out.println(movie);
+			sb.append(movie + "\n");
 		}
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file2));
+			bw.write(sb.toString());
+			bw.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
