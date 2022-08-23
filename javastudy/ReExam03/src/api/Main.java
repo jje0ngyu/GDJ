@@ -48,6 +48,8 @@ public class Main {
 			BufferedWriter bw = new BufferedWriter(new FileWriter (file));
 			
 			// StringBuilder에 저장된 응답(XML) 데이터를 JSON으로 변경하기
+			//* 한 줄로 제이슨 체이닝하기
+//			JSONObject item = XML.toJSONObject(sb.toString()).getJSONObject("rss").getJSONObject("channel").getJSONObject("item");
 			JSONObject obj = XML.toJSONObject(sb.toString());
 			System.out.println(obj);
 			
