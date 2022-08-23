@@ -34,10 +34,11 @@ public class ApiMain {
 		StringBuilder urBuilder = new StringBuilder();
 		try {
 			urBuilder.append("http://apis.data.go.kr/B552061/AccidentDeath/getRestTrafficAccidentDeath");
-			urBuilder.append("?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8"));
+			urBuilder.append("?ServiceKey=" + URLEncoder.encode(serviceKey, "UTF-8"));
 			urBuilder.append("&searchYear=2021");
 			urBuilder.append("&siDo=1100");  //* 서울특별시 : 1100
 			urBuilder.append("&guGun=1125"); //* 금천구 : 1125
+			urBuilder.append("&type=json");
 			urBuilder.append("&numOfRows=10");
 			urBuilder.append("&pageNo=1");
 			
@@ -50,7 +51,7 @@ public class ApiMain {
 		try {
 			URL url = new URL(apiURL);
 			con = (HttpURLConnection)url.openConnection();
-			con.setRequestProperty("Content_Type", "application/xml; charset=UTF-8");
+			con.setRequestProperty("Content_Type", "application/json; charset=UTF-8");
 			
 		} catch (MalformedURLException e) {
 			System.out.println("API 주소 오류");
@@ -71,7 +72,7 @@ public class ApiMain {
 			}
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				sb.append(line + "\n");
+				sb.append(line);
 			}
 			
 			br.close();
@@ -80,15 +81,15 @@ public class ApiMain {
 			System.out.println("API 응답 실패");
 		}
 		
-		// xml 파일 생성
-		File file = new File("accident.txt");
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-			bw.write(sb.toString());
-			bw.close();
-		} catch (IOException e) {
-			System.out.println("파일 생성 실패");
-		}
+//		// xml 파일 생성
+//		File file = new File("accident.txt");
+//		try {
+//			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+//			bw.write(sb.toString());
+//			bw.close();
+//		} catch (IOException e) {
+//			System.out.println("파일 생성 실패");
+//		}
 	
 		
 
@@ -98,16 +99,13 @@ public class ApiMain {
 			
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(file);
+			Document doc = builder.parse(sb.toString());
 			
 			Element root = doc.getDocumentElement();
 			NodeList items = root.getElementsByTagName("items");
 			for (int i = 0; i < items.getLength(); i++) {
-				Node itemChild = items.item(i);
-				NodeList items2 = itemChild.getChildNodes();
-				for (int j = 0; j < items2.getLength(); j++) {
-				
-				Element item = (Element) items.item(j);
+				Element item = (Element) items.item(i);
+							
 					String occrrnc_dt = item.getElementsByTagName("occrrnc_dt").item(0).getTextContent();
 					String occrrnc_day_cd = item.getElementsByTagName("occrrnc_day_cd").item(0).getTextContent();
 					String dth_dnv_cnt = item.getElementsByTagName("dth_dnv_cnt").item(0).getTextContent();
@@ -121,7 +119,7 @@ public class ApiMain {
 						.build();
 				
 				accidents.add(accident);
-				}
+				
 			}
 			
 		} catch (Exception e) {
@@ -133,7 +131,7 @@ public class ApiMain {
 		StringBuilder accBuilder = new StringBuilder();
 		File accInfo = new File ("accident.txt");
 		for (Accident accident : accidents ) {
-			accBuilder.append(accident + "\n");
+			accBuilder.append(accident);
 		}
 		
 		try {
