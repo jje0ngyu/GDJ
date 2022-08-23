@@ -35,11 +35,11 @@ public class ApiMain {
 		try {
 			urBuilder.append("http://apis.data.go.kr/B552061/AccidentDeath/getRestTrafficAccidentDeath");
 			urBuilder.append("?serviceKey=" + URLEncoder.encode(serviceKey, "UTF-8"));
-			urBuilder.append("searchYear=2021");
-			urBuilder.append("siDo=1100");  //* 서울특별시 : 1100
-			urBuilder.append("guGun=1125"); //* 금천구 : 1125
-			urBuilder.append("numOfRows=10");
-			urBuilder.append("pageNo=1");
+			urBuilder.append("&searchYear=2021");
+			urBuilder.append("&siDo=1100");  //* 서울특별시 : 1100
+			urBuilder.append("&guGun=1125"); //* 금천구 : 1125
+			urBuilder.append("&numOfRows=10");
+			urBuilder.append("&pageNo=1");
 			
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("인코딩 실패");
@@ -81,7 +81,7 @@ public class ApiMain {
 		}
 		
 		// xml 파일 생성
-		File file = new File("accident.xml");
+		File file = new File("accident.txt");
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			bw.write(sb.toString());
