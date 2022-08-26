@@ -99,6 +99,14 @@ INSERT INTO
     EMPLOYEE
 VALUES
     (1004, '한성일', 2, '과장', 'M', '93-04-01', 5000000);
+INSERT INTO
+    EMPLOYEE
+VALUES
+    (1010, '아나', 2, '이사', 'F', '93-04-01', 5000000);
+INSERT INTO
+    EMPLOYEE
+VALUES
+    (1011, '파라', 2, '대리', 'F', '93-04-01', 5000000);
 
 COMMIT;
 
