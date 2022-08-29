@@ -124,3 +124,20 @@ SELECT
 SELECT
       COUNT(*)
     FROM SAMPLE;
+    
+
+-- 연습문제 3
+-- 성명   국어 영어 수학 합계 평균
+-- 아무개 100  100  100  300  100
+-- 영숙   0    100  100  200  66.67
+-- 정수   100  0    100  200  66.67
+-- 지영   100  100  0    200  66.67
+SELECT
+      NVL(NAME,'아무개') AS 성명
+    , NVL(KOR,0) AS 국어
+    , NVL(ENG,0) AS 영어
+    , NVL(MATH,0) AS 수학
+    , NVL(KOR,0) + NVL(ENG,0) + NVL(MATH,0) AS 합계
+    , ROUND ((NVL(KOR,0) + NVL(ENG,0) + NVL(MATH,0)) / 3, 2) AS 평균
+  FROM
+      SAMPLE;
