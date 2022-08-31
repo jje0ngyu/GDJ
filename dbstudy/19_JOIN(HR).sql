@@ -95,18 +95,62 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY, C.COUNTRY_NAME
 --    부서번호(DEPARTMENT_ID)가 없는 사원도 조회하고, EMPLOYEE_ID순으로 오름차순 정렬하시오.
 --    부서번호(DEPARTMENT_ID)가 없는 사원의 부서명(DEPARTMENT_NAME)은 'None'으로 조회하시오.
 
+-- 부서                   - 사원
+-- 일치하는 정보 포함(+)    모든 정보 포함
+-- 오른쪽에 있는 사원 테이블의 모든 정보 포함을 위해 '오른쪽 외부 조인'
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, NVL(D.DEPARTMENT_NAME, 'None')
+  FROM DEPARTMENTS D RIGHT OUTER JOIN EMPLOYEES E
+    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+ ORDER BY E.EMPLOYEE_ID;
+ 
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, NVL(D.DEPARTMENT_NAME, 'None')
+  FROM DEPARTMENTS D, EMPLOYEES E
+ WHERE D.DEPARTMENT_ID(+) = E.DEPARTMENT_ID
+ ORDER BY E.EMPLOYEE_ID;
 
 -- 8. 부서별 근무하는 사원수를 조회하시오.
 --    단, 근무하는 사원이 없으면 0으로 조회하시오.
+SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME, COUNT(E.DEPARTMENT_ID) AS 사원수
+  FROM DEPARTMENTS D LEFT OUTER JOIN EMPLOYEES E
+    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+ GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME
+ ORDER BY D.DEPARTMENT_ID;
 
-
-
-
+SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME, COUNT(E.DEPARTMENT_ID) AS 사원수
+  FROM DEPARTMENTS D, EMPLOYEES E
+ WHERE D.DEPARTMENT_ID = E.DEPARTMENT_ID(+)
+ GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME
+ ORDER BY D.DEPARTMENT_ID;
+ 
 /* SELF JOIN */
 
 -- 9. MANAGER보다 먼저 입사한 사원들의 EMPLOYEE_ID, LAST_NAME, HIRE_DATE과 MANAGER의 HIRE_DATE를 조회하시오.
 --    사원의 HIRE_DATE가 MANAGER의 HIRE_DATE보다 작은 사원을 조회하시오. (MANAGER보다 먼저 입사한 사원)
 
+-- 비교 대상
+-- 1) 모든 사원 정보 : EMPLOYEES E
+-- 2) MANAGER의 정보 : EMPLOYEES M
+
+-- 관계
+-- PK             - FK
+-- EMPLOYEE_ID    - MANAGER_ID
+
+-- 조인 조건 ★ (난도 다소 높음)
+-- 사원들의 매니저 번호 = 매니저의 사원 번호
+-- E.MANAGER_ID = M.EMPLOYEE_ID
+
+SELECT
+       E.EMPLOYEE_ID -- 사원번호
+     , E.LAST_NAME   -- 사원명
+     , E.HIRE_DATE   -- 사원입사일
+     , M.LAST_NAME   -- 상사이름
+     , M.HIRE_DATE    -- 상사입사일
+  FROM
+       EMPLOYEES E INNER JOIN EMPLOYEES M
+    ON
+       E.MANAGER_ID = M.EMPLOYEE_ID
+ WHERE
+       TO_DATE(E.HIRE_DATE) < TO_DATE(M.HIRE_DATE);
 
 -- 10. 같은 부서의 사원들 중에서 나보다 늦게 입사하였으나 연봉을 더 많이 받는 사원이 있는 사원들의
 --     DEPARTMENT_ID, LAST_NAME, SALARY, HIRE_DATE와 높은 연봉을 받는 사원의 LAST_NAME, SALARY, HIRE_DATE를 조회하시오.
