@@ -107,6 +107,7 @@ COMMIT;
              ON 조인조건
       2) 콤마(,) 문법
          SELECT 칼럼
+         
            FROM 테이블1, 테이블2
           WHERE 조인조건
        
