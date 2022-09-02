@@ -20,3 +20,12 @@ CREATE VIEW VIEW_EMP
             
 -- 2. 뷰 확인
 SELECT * FROM VIEW_EMP;
+
+-- 3. 뷰 삭제
+DROP VIEW VIEW_EMP;
+
+-- 사용자가 작성한 VIEW 확인하려면 USER_VIEWS 데이터 사전을 확인
+DESC USER_VIEWS;
+SELECT VIEW_NAME  -- 뷰 이름
+     , TEXT       -- 저장된 쿼리문
+  FROM USER_VIEWS;
