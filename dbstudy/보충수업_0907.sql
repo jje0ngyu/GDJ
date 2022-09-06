@@ -5,22 +5,37 @@
 --    (2) BOOK_NAME : 책 이름, 가변 길이 문자 (최대 100 BYTE)
 --    (3) PUBLISHER : 출판사, 가변 길이 문자 (최대 50 BYTE)
 --    (4) PRICE : 가격, 숫자 (최대 6자리)
-
+CREATE TABLE BOOK(
+    BOOK_ID NUMBER(11) NOT NULL,
+    BOOK_NAME VARCHAR2(100 BYTE),
+    PUBLISHER VARCHAR2 (50 BYTE),
+    PRICE NUMBER(6)
+);
 
 -- 2) CUSTOMER 테이블
 --    (1) CUSTOMER_ID : 고객 아이디, 숫자 (최대 11자리), 필수
 --    (2) CUSTOMER_NAME : 고객 이름, 가변 길이 문자 (최대 20 BYTE)
 --    (3) ADDRESS : 고객 주소, 가변 길이 문자 (최대 50 BYTE)
 --    (4) PHONE : 고객 전화, 가변 길이 문자 (최대 20 BYTE)
-
-
+CREATE TABLE CUSTOMER(
+    CUSTOMER_ID NUMBER(11) NOT NULL,
+    CUSTOMER_NAME VARCHAR2 (20 BYTE),
+    ADDRESS VARCHAR2 (50 BYTE),
+    PHONE VARCHAR2 (20 BYTE)
+);
 -- 3) ORDERS 테이블
 --    (1) ORDER_ID : 주문 아이디, 숫자 (최대 11자리), 필수
 --    (2) CUSTOMER_ID : 고객 아이디, 숫자 (최대 11자리)
 --    (3) BOOK_ID : 책 아이디, 숫자 (최대 11자리)
 --    (4) AMOUNT : 판매수량, 숫자 (최대 2자리)
 --    (5) ORDER_DATE : 주문일, 날짜
-
+CREATE TABLE ORDERS(
+    ORDER_ID NUMBER(11) NOT NULL,
+    CUSTOMER_ID NUMBER(11),
+    BOOK_ID NUMBER(11),
+    AMOUNT NUMBER(2),
+    ORDER_DATE DATE
+);
 
 -- 4) 아래 INSERT 문은 변경 없이 그대로 사용한다. (오라클 INSERT 방식)
 INSERT ALL
@@ -61,12 +76,25 @@ COMMIT;
 
 -- 2. BOOK, CUSTOMER, ORDERS 테이블의 BOOK_ID, CUSTOMER_ID, ORDER_ID 칼럼에 기본키를 추가하시오.
 -- 기본키 제약조건의 이름은 PK_BOOK, PK_CUSTOMER, PK_ORDERS으로 지정하시오.
-
+ALTER TABLE BOOK
+    ADD CONSTRAINT PK_BOOK PRIMARY KEY (BOOK_ID);
+ALTER TABLE CUSTOMER
+    ADD CONSTRAINT PK_CUSTOMER PRIMARY KEY (CUSTOMER_ID);
+ALTER TABLE ORDERS
+    ADD CONSTRAINT PK_ORDERS PRIMARY KEY (ORDER_ID);
 
 -- 3. ORDERS 테이블의 CUSTOMER_ID, BOOK_ID 칼럼에 각각 CUSTOMER 테이블과 BOOK 테이블을 참조할 외래키를 추가하시오.
 -- 외래키 제약조건의 이름은 FK_ORDERS_CUSTOMER, FK_ORDERS_BOOK로 지정하시오.
 -- CUSTOMER_ID나 BOOK_ID가 삭제되는 경우 이를 참조하는 ORDERS 테이블의 정보는 NULL로 처리하시오.
-
+ALTER TABLE ORDERS DROP CONSTRAINT FK_ORDERS_CUSTOMER;
+ALTER TABLE ORDERS DROP CONSTRAINT FK_ORDERS_BOOK;
+    
+ALTER TABLE ORDERS
+    ADD CONSTRAINT FK_ORDERS_CUSTOMER FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID)
+        ON DELETE SET NULL;
+ALTER TABLE ORDERS
+    ADD CONSTRAINT FK_ORDERS_BOOK FOREIGN KEY (BOOK_ID) REFERENCES BOOK (BOOK_ID)
+        ON DELETE SET NULL;
 
 -- 4. 2014년 7월 4일부터 7월 7일 사이에 주문 받은 도서를 제외하고 나머지 모든 주문 정보를 조회하시오.
 --    조회할 데이터 : 주문번호, 주문자명, 책이름, 판매가격, 주문일자
@@ -77,7 +105,11 @@ COMMIT;
 -- 10       장미란  역도 단계별 기술 24000    14/07/10
 -- 9        김연아  올림픽 챔피언    13000    14/07/09
 -- 8        장미란  올림픽 챔피언    26000    14/07/08
-
+SELECT O.ORDER_ID, C.CUSTOMER_NAME, B.BOOK_NAME, B.PRICE, O.ORDER_DATE
+  FROM ORDERS O, CUSTOMER C, BOOK B
+ WHERE O.CUSTOMER_ID = C.CUSTOMER_ID
+   AND O.BOOK_ID = B.BOOK_ID
+   AND NOT O.ORDER_DATE = MONTHS_BETWEEN(TO_DATE(14/07/04,'YY-MM-DD'), TO_DATE(14/07/07, 'YY-MM-DD'));
 
 -- 5. 모든 구매 고객의 이름과 총구매액(PRICE * AMOUNT)을 조회하시오.
 -- 구매 이력이 있는 고객만 조회하시오.
