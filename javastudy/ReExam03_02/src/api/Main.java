@@ -1,6 +1,5 @@
 package api;
 
-import java.awt.JobAttributes;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
