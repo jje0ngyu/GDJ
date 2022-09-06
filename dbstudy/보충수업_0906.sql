@@ -167,3 +167,41 @@ EXCEPTION
 END MY_PROC;
 
 EXECUTE MY_PROC(101);
+
+
+-- 사용자 함수
+-- 학생 아이디를 전달하면 해당 학생의 학번을 반환하는 함수 만들기
+-- 아이디 'jun123'을 전달하면 학번 10101 이 반환되는지 확인
+-- 함수이름 GET_STUDENT
+
+CREATE OR REPLACE FUNCTION GET_STUDENT (U_ID STUDENT.USERID%TYPE)
+RETURN NUMBER -- 반환하는 학번의 타입이 NUMBER(5)이므로.
+IS
+    SNO STUDENT.STUDNO%TYPE;
+BEGIN
+    SELECT STUDNO
+      INTO SNO
+      FROM STUDENT
+     WHERE USERID = U_ID;
+    RETURN SNO;
+END GET_STUDENT;
+
+-- 중복 안 되도록 출력방법 1
+SELECT DISTINCT GET_STUDENT ('Dals')
+  FROM STUDENT;
+-- 중복 안 되도록 출력방법 2
+SELECT GET_STUDNET (USERID)
+  FROM STUDENT
+ WHERE USERID = 'Dals';
+ 
+ 
+-- 트리거
+-- SAMPLE 테이블의 행을 갱신, 삭제 이후 'SampleTrg 동작' 서버메시지 출력하기
+CREATE OR REPLACE TRIGGER SampleTrg
+    AFTER
+    UPDATE OR DELETE
+    ON SAMPLE
+    FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE ('SampleTrg 동작');
+END SampleTrg;
