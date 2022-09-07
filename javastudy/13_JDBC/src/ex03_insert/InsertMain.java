@@ -31,14 +31,22 @@ public class InsertMain {
 		PreparedStatement ps = null;
 		
 		try {
+			// ① CLASSPATH 설정
+			// OracleDriver 클래스 로드
+			// OracleDriver 클래스가 저장된 ojdbc6.jar 파일을 Classpath에 등록
 			Class.forName("oracle.jdbc.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			
+			// ② DB접속 - Connection 객체 생성
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";		//* JDBC 버전에 따라 주소가 다르다. (DB종류, 버전 정확히 알 것)
 			String user = "SCOTT";
 			String password = "TIGER";
 			con = DriverManager.getConnection(url, user, password);
 			
+			// ③ 쿼리문 작성 (변수 처리할 부분은 '?'로 처리)
 			String sql = "INSERT INTO BOARD (BOARD_NO, TITLE, CONTENT, HIT, CREATE_DATE) VALUES (BOARD_SEQ.NEXTVAL, ?, ?, 0, SYSDATE)";
 			
+			// ④ PreparedStatement 객체 생성
+			// * 쿼리문 전달
 			ps = con.prepareStatement(sql);
 			
 			// 쿼리문에 포함된 '?'에 변수 전달하기
@@ -62,6 +70,7 @@ public class InsertMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			// ⑤ 접속 해제 ★
 			try {
 				if (ps != null) ps.close();
 				if (con != null) con.close();
