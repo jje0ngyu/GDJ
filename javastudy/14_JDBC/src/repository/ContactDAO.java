@@ -29,7 +29,7 @@ public class ContactDAO {
 		
 	}
 	
-	// Singleton 패턴 - 3
+	// ■ Singleton 패턴 - 3 ■
 	// 만들어 둔 ContactDAO 객체를 외부에 반환한다.
 	public static ContactDAO getInstance() {
 		return contactDAO;

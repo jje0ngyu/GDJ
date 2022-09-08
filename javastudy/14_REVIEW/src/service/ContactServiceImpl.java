@@ -6,12 +6,8 @@ import domain.ContactDTO;
 import repository.ContactDAO;
 
 public class ContactServiceImpl implements ContactService {
-	/***************** Field *****************/
-	
-	// DAO에 데이터 전달, DAO로부터 결과 반환 받기 위해 'DAO 선언'
-	private ContactDAO dao = ContactDAO.getInstance(); 
-	
-	/***************** Method *****************/
+
+	private ContactDAO dao = ContactDAO.getInstance();
 	
 	@Override
 	public void addContact(ContactDTO contact) {
@@ -21,39 +17,23 @@ public class ContactServiceImpl implements ContactService {
 		} else {
 			System.out.println("연락처 등록이 실패했습니다.");
 		}
-
 	}
 
 	@Override
 	public void modifyContact(ContactDTO contact) {
-		int result = dao.updateContact(contact);
-		if (result > 0) {
-			System.out.println("연락처가 수정되었습니다.");
-		} else {
-			System.out.println("연락처 수정이 실패했습니다.");
-		}
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void deleteContact(int contact_no) {
-		int result = dao.deleteContact(contact_no);
-		if (result > 0) {
-			System.out.println("연락처가 삭제되었습니다.");
-		} else {
-			System.out.println("연락처 삭제가 실패했습니다.");
-		}
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void findContactByNo(int contact_no) {
-		ContactDTO contact = dao.selectContactByNo(contact_no);
-		if (contact == null) {
-			System.out.println("조회된 연락처가 없습니다.");
-		} else {
-			System.out.println(contact);
-		}
+		// TODO Auto-generated method stub
 
 	}
 
