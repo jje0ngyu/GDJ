@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data	// @Getter, @Setter, @ToString 등 포함
+@Data  // @Getter, @Setter, @ToString 등 포함
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,5 +16,5 @@ public class ContactDTO {
 	private String name;
 	private String tel;
 	private String email;
-	private Date reg_date; 
+	private Date reg_date;
 }

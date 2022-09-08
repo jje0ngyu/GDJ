@@ -5,20 +5,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import domain.ContactDTO;
+
 public class ContactDAO {
-	/********************* Singleton *********************/
+
+	/***************** Singleton *****************/
+	
 	// DAO는 하나의 객체만 생성할 수 있도록
 	// Singleton Pattern으로 생성
 	
 	// Singleton 패턴 - 1
-	// ContactDAO 객체를 하나 만들어 준다.
+	// ContactDAO 객체를 하나 만들어 둔다.
 	private static ContactDAO contactDAO = new ContactDAO();
 	
 	// Singleton 패턴 - 2
 	// 외부에서는 ContactDAO 객체를 못 만들도록 제한한다.
-	// private 생성자
+	// private 생성자를 이용한다.
 	private ContactDAO() {
 		
 	}
@@ -30,17 +36,19 @@ public class ContactDAO {
 	}
 	
 	
-	/********************* Field *********************/
+	/***************** Field *****************/
 	
 	// 데이터베이스에 접근할 때 사용하는 공통 요소
-	private Connection con;
-	private PreparedStatement ps;
-	private ResultSet rs;
+	private Connection con;			// DB접속
+	private String sql;				// 쿼리문
+	private PreparedStatement ps;	// 쿼리문 실행
+	private ResultSet rs;   	    // select 결과
+	private int result; 			// insert, update, delete 결과
 	
 	
-	/********************* Method *********************/
+	/***************** Method *****************/
 	
-	// 모든 데이터베이스 작업 (CRUD : CREATE (*INSERT) / READ (*SELECT) / UPDATE / DELETE)의 공통 작업은 2가지
+	// 모든 데이터베이스 작업(CRUD : CREATE/READ/UPDATE/DELETE)의 공통 작업은 2가지
 	// 1. Connection 객체 생성
 	// 2. close
 	
@@ -53,34 +61,161 @@ public class ContactDAO {
 		// Connection 객체 반환
 		// db.properties 파일의 접속 정보 읽기
 		Properties p = new Properties();
-		p.load(new FileReader("db.properties"));	// 경로가 없는 파일은 동일한 프로젝트 디렉터리에 있다는 의미(14_JDBC\\db.properties)
+		p.load(new FileReader("db.properties"));  // 경로가 없는 파일은 동일한 프로젝트 디렉터리에 있다는 의미(14_JDBC\\db.properties)
 		String url = p.getProperty("url");
 		String user = p.getProperty("user");
 		String password = p.getProperty("password");
 		return DriverManager.getConnection(url, user, password);
+		
 	}
 	
 	// 공통 메소드 - 2
 	public void close() {
 		try {
-			if (rs != null) rs.close();
-			if (ps != null) ps.close();
-			if (con != null) con.close();
-		} catch (Exception e) {
+			if(rs != null) rs.close();
+			if(ps != null) ps.close();
+			if(con != null) con.close();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
 	
-		 try {
-			 ContactDAO dao =  ContactDAO.getInstance();
-			 Connection con = dao.getConnection();
-			 
-			 System.out.println("접속 성공");
-			 
-		 } catch (Exception e) {
-			 System.out.println("오류");
-		 } 
+	// 연락처 추가 메소드
+	// 1. 매개변수 : ContactDTO
+	// 2. 반환값   : 0 또는 1
+	public int insertContact(ContactDTO contact) {
+		
+		try {
+			con = getConnection();
+			sql = "INSERT into contact values (contact_seq.nextval, ?, ?, ?, sysdate)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, contact.getName());
+			ps.setString(2, contact.getTel());
+			ps.setString(3, contact.getEmail());
+			result = ps.executeUpdate();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return result;
 	}
+	
+	// 연락처 수정 메소드
+	// 1. 매개변수 : ContactDTO
+	// 2. 반환값   : 0 또는 1
+	public int updateContact(ContactDTO contact) {
+	
+		try {
+			con = getConnection();
+			sql = "update contact set name = ?, tel = ?, email = ? where contact_no = ?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setString(1, contact.getName());
+			ps.setString(2, contact.getTel());
+			ps.setString(3, contact.getEmail());
+			ps.setInt(4, contact.getContact_no());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return result;
+	
+	}
+	// 연락처 삭제 메소드
+	// 1. 매개변수 : contact_no
+	// 2. 반환값   : 0 또는 1
+		
+	public int deleteContact(int contact_no) {
+		try {
+			con = getConnection();
+			sql = "delete from contact where contact_no = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, contact_no);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return result;
+	}
+	
+	// 연락처 조회 메소드
+	// 1. 매개변수 : contact_no
+	// 2. 반환값   : ContactDTO 또는 null
+	public ContactDTO selectContactByNo(int contact_no) {
+		
+		ContactDTO contact = null;
+		
+		try {
+			con = getConnection();
+			sql = "select contact_no, name, tel, email, reg_date from contact where contact_no = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, contact_no);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				contact = new ContactDTO();
+				contact.setContact_no(rs.getInt(1));
+				contact.setName(rs.getString(2));
+				contact.setTel(rs.getString(3));
+				contact.setEmail(rs.getString(4));
+				contact.setReg_date(rs.getDate(5));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return contact;
+	}
+	
+	
+	// 연락처 목록 메소드
+	// 1. 매개변수 : 없음
+	// 2. 반환값   : ArrayList<ContactDTO>
+	public List<ContactDTO> selectAllContacts() {
+		
+		List<ContactDTO> contacts = new ArrayList<ContactDTO>();
+		
+		try {
+			con = getConnection();
+			sql = "select contact_no, name, tel, email, reg_date from contact";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ContactDTO contact = ContactDTO.builder()
+						.contact_no(rs.getInt(1))
+						.name(rs.getString(2))
+						.tel(rs.getString(3))
+						.email(rs.getString(4))
+						.reg_date(rs.getDate(5))
+						.build();
+				contacts.add(contact);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return contacts;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
