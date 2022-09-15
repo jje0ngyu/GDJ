@@ -55,7 +55,7 @@
 
 
     <!--
-        2. name 속성
+        2. name 속성 ★★★
             1) 서버 측에서 인식하는 파라미터(parameter)의 이름
             2) 동일한 name이 없는 경우 서버 측에서는 변수로 인식
             3) 동일한 name이 여러 개 있으면 서버 측에서는 배열로 인식
@@ -188,11 +188,11 @@
         2) <form enctype="mutipart/form-data"> 여야 함
         3) 다중 첨부가 필요한 경우 multiple 속성(boolean 속성)을 추가함
     -->
-<form method="post" enctype="multipart/form-data">
-    증명사진
-    <input type="file" name="profile" accept="image/*" multiple>
-    <button>전송</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        증명사진
+        <input type="file" name="profile" accept="image/*" multiple>
+        <button>전송</button>
+    </form>
 
     <!--
         10. <label> 태그
@@ -215,6 +215,109 @@
             &nbsp;&nbsp;&nbsp;
             <button>전송</button>
         </fieldset>
+    </form>
+
+
+    <!-- 네이버 검색창 -->
+    <form action="https://search.naver.com/search.naver"
+        method="get">
+        <!-- hidden -->
+        <input type="hidden" name="where" value="nexearch">
+        <input type="hidden" name="sm" value="top_hty">
+        <input type="hidden" name="fbm" value="0">
+        <input type="hidden" name="ie" value="utf8">
+        <!-- 검색창 -->
+        <input type="text" name="query">
+        <button>네이버 검색</button>
+    </form>
+
+    <!-- 다음 검색창 -->
+    <form action="https://search.daum.net/search" method="get">
+        <!-- hidden -->
+        <input type="hidden" name="w" value="tot">
+        <input type="hidden" name="DA" value="YZR">
+        <input type="hidden" name="t__nil_searchbox" value="btn">
+        <input type="hidden" name="sug" value="">
+        <input type="hidden" name="sugo" value="">
+        <input type="hidden" name="sq" value="">
+        <input type="hidden" name="o" value="">
+        <!-- 검색창 -->
+        <input type="text" name="q">
+        <button>다음 검색</button>
+    </form>
+
+    <!-- 연습문제 1 -->
+    <h1>연습문제-1</h1>
+    <form action="01_overview.html" method="post">
+        <input type="text" placeholder="example@naver.com">
+        <input type="password" placeholder="비밀번호">
+        <button>로그인</button>
+    </form>
+
+    <h1>연습문제-2</h1>
+    <form action="01_overview.html" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="아이디">
+                    </td>
+                    <td rowspan="2">
+                        <button>로그인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" placeholder="비밀번호">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <h1>연습문제-3</h1>
+    <form action="01_overview.html" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">개인 정보 작성</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>이름</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>메일 주소</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>연락처</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>블록/홈페이지</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">
+                        <button>제출하기</button>
+                        <input type="reset" value="다시작성">
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
     </form>
 </body>
 </html>
