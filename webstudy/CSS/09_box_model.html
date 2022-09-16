@@ -30,8 +30,8 @@
     <style> /*width / height (%)*/
         .wrap {
             /* 부모 */
-            width : 200px;
-            height: 200px;
+            width  : 200px;
+            height : 200px;
         }
         .wrap > .box3 {
             /* 자식 : %의 기준은 부모의 크기 */
@@ -71,14 +71,21 @@
 
     <style> /*border-radius*/
         .box6 {
-            width : 100px;
-            height: 100px;
+            width  : 100px;
+            height : 100px;
             border : 1px solid black;
-            /* 모서리 곡률 */
-            border-radius: 5px;
-            border-radius: 10px 0;
-            border-radius: 20px 0 20px; /* % 모양을 닮았다. 1) top-left    2) top-right + bottom-left    3) bottom-right */
-            border-radius: 20px 0 15px 20px; /* top 에서 시계방향으로 적용 */
+            /* 
+            모서리 곡률
+            ┌──────────┐
+            │ 1      2 │
+            │          │
+            │ 4      3 │
+            └──────────┘
+            */
+            /*  전체        */  border-radius: 5px;
+            /*  13  24      */  border-radius: 10px 0;
+            /*  1   24   3  */  border-radius: 20px 0 20px;
+            /*  1  2  3  4  */  border-radius: 20px 0 15px 20px; /* top 에서 시계방향으로 적용 */
         }
     </style>
     <div class="box6">BOX6</div><hr/>
@@ -90,11 +97,18 @@
     <style> /*padding*/
         .box7 {
             border: 1px solid black;
-            /* 내부 여백 : content와 border 사이 공간 */
-            padding : 0;
-            padding : 10px 20px; /* 1) 상하   2) 좌우 */
-            padding : 20px 0px 20px; /* 1) 상   2) 좌우   3) 하 */
-            padding : 5px 10px 15px 20px; /* top 에서 시계방향으로 적용 : 1)상  2)우  3) 하  4)좌 */
+            /* 
+            내부 여백 : content와 border 사이 공간
+            ┌─────────┐
+            │    1    │
+            │ 4     2 │
+            │    3    │
+            └─────────┘
+            */
+            /*  전체        */  padding: 0;
+            /*  13  24      */  padding: 10px 20px;
+            /*  1   24   3  */  padding: 20px 0px 20px;
+            /*  1  2  3  4  */  padding: 5px 10px 15px 20px;
         }
     </style>
     <div class="box7">BOX7</div><hr/>
@@ -130,16 +144,16 @@
                 박스 크기 = 너비/높이
                 이와 같은 방식으로 크기가 결정되는 박스를 border-box 라고 함
                 box-sizing 속성으로 박스의 종류를 결정할 수 있다.
+                가장 널리 사용된다.
              */
             width      : 100px;
             height     : 100px;
             border     : 1px solid black;
             padding    : 10px;
-            box-sizing : border-box;    /* 가장 널리 사용된다. */
-                        /*박스크기 = content(78px) + padding(20px) + brder(2)*/
+            box-sizing : border-box;    /* 박스크기 = content(78px) + padding(20px) + brder(2) */
         }
     </style>
-    <div class="box9">BOX9</div>
+    <div class="box9">BOX9</div><hr/>
 
 
 
@@ -152,11 +166,13 @@
             border : 1px solid black;
             /* 바깥 여백 */
             margin : 10px;
-            margin : 10px 0;             /* 1)상/하   2)좌/우                 */
-            margin : 10px 0 10px;        /* 1)상  2)좌/우  3)하               */
-            margin : 5px 10px 15px 20px; /* 1)상  2)우  3)하  4)좌 : 시계방향 */
+            margin : 10px 0;             /* 1)상/하  2)좌/우                 */
+            margin : 10px 0 10px;        /* 1)상     2)좌/우  3)하               */
+            margin : 5px 10px 15px 20px; /* 1)상     2)우     3)하  4)좌 : 시계방향 */
+            /* 박스를 화면 가운데 배치하기 */
+            margin : 0 auto;
         }
     </style>
-    <div class="box10">BOX10</div>
+    <div class="box10">BOX10:margin</div>
 </body>
 </html>
