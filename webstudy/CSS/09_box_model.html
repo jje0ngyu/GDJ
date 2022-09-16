@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style> /*width / height (px)*/
+        .box1 {
+            /* 너비 */ width : 100px;
+            /* 높이 */ height: 100px;
+            /* 배경 */ background-color: limegreen;
+        }
+        .box2 {
+            /* 인라인 요소(span, a 등)는 너비/높이 적용 불가 */
+            width : 100px;
+            height: 100px;
+            background-color: salmon;
+        }
+    </style>
+    <div class="box1">BOX1</div>
+    <span class="box2">BOX2</span><hr/>
+
+
+
+
+    
+    <style> /*width / height (%)*/
+        .wrap {
+            /* 부모 */
+            width : 200px;
+            height: 200px;
+        }
+        .wrap > .box3 {
+            /* 자식 : %의 기준은 부모의 크기 */
+            width           : 50%;
+            height          : 50%;
+            background-color: indianred;
+        }
+        .wrap > .box4 {
+            /* 자식 : %의 기준은 부모의 크기 */
+            width           : 25%;
+            height          : 25%;
+            background-color: rosybrown;
+        }
+    </style>
+    <div class="wrap">
+        <div class="box3">BOX3</div>
+        <div class="box4">BOX4</div>
+    </div><hr/>
+
+
+
+
+
+    <style> /*border*/
+        .box5 {
+            /* 테두리 두께  */ border-width : 1px;
+            /* 테두리 종류  */ border-style: solid;
+            /* 테두리 색상  */ border-color: aqua;
+            /* 단축 속성 ★★ */ border: 2px dashed maroon;
+            /* 방향 선택 ★★ */ border-bottom: 5px double blue; /* top / bottom / left / right */
+        }
+    </style>
+    <div class="box5">BOX5</div><hr/>
+
+
+
+
+    <style> /*border-radius*/
+        .box6 {
+            width : 100px;
+            height: 100px;
+            border : 1px solid black;
+            /* 모서리 곡률 */
+            border-radius: 5px;
+            border-radius: 10px 0;
+            border-radius: 20px 0 20px; /* % 모양을 닮았다. 1) top-left    2) top-right + bottom-left    3) bottom-right */
+            border-radius: 20px 0 15px 20px; /* top 에서 시계방향으로 적용 */
+        }
+    </style>
+    <div class="box6">BOX6</div><hr/>
+
+
+
+
+
+    <style> /*padding*/
+        .box7 {
+            border: 1px solid black;
+            /* 내부 여백 : content와 border 사이 공간 */
+            padding : 0;
+            padding : 10px 20px; /* 1) 상하   2) 좌우 */
+            padding : 20px 0px 20px; /* 1) 상   2) 좌우   3) 하 */
+            padding : 5px 10px 15px 20px; /* top 에서 시계방향으로 적용 : 1)상  2)우  3) 하  4)좌 */
+        }
+    </style>
+    <div class="box7">BOX7</div><hr/>
+
+
+
+
+
+    <style>
+        .box8 {
+            /*
+                박스 크기 : 너비/높이 + 테두리 + 내부 여백
+                이와 같은 방식으로 크기가 결정되는 박스를 content-box 라고 함
+                box-sizing 속성으로 박스의 종류를 결정할 수 있다.
+            */
+            width      : 200px;
+            height     : 100px;
+            border     : 1px solid black;
+            padding    : 10px;
+            box-sizing : content-box; /* 디폴트(생략가능)
+                         박스 크기 (122px) = content(100px) + padding(20px) + border(2px) */
+        }
+    </style>
+    <div class="box8">BOX8</div><hr/>
+
+
+
+
+
+    <style>
+        .box9 {
+            /* 
+                박스 크기 = 너비/높이
+                이와 같은 방식으로 크기가 결정되는 박스를 border-box 라고 함
+                box-sizing 속성으로 박스의 종류를 결정할 수 있다.
+             */
+            width      : 100px;
+            height     : 100px;
+            border     : 1px solid black;
+            padding    : 10px;
+            box-sizing : border-box;    /* 가장 널리 사용된다. */
+                        /*박스크기 = content(78px) + padding(20px) + brder(2)*/
+        }
+    </style>
+    <div class="box9">BOX9</div>
+
+
+
+
+
+    <style>
+        .box10 {
+            width  : 100px;
+            height : 10px;
+            border : 1px solid black;
+            /* 바깥 여백 */
+            margin : 10px;
+            margin : 10px 0;             /* 1)상/하   2)좌/우                 */
+            margin : 10px 0 10px;        /* 1)상  2)좌/우  3)하               */
+            margin : 5px 10px 15px 20px; /* 1)상  2)우  3)하  4)좌 : 시계방향 */
+        }
+    </style>
+    <div class="box10">BOX10</div>
+</body>
+</html>

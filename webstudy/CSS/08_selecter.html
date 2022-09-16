@@ -118,7 +118,7 @@
         .europe > div + div {
             background-color: bisque;
         }
-        .europe > h3 + h3 {
+        .europe > h3:nth-of-type(2){
             background-color: blue;
         }
     </style>
@@ -136,7 +136,7 @@
 
     <style>
         /*
-           8. 구조 선택자       ??ul 에도 적용될까?
+           8. 구조 선택자
               1) :first-of-type     : 첫 번째 요소
               2) :last-of-type      : 마지막 요소
               3) :nth-of-type(n)    : n번째 요소
@@ -179,6 +179,56 @@
     <form>
         <input type="text" placeholder="ID"><br/>
         <input type="password">
+    </form><hr/>
+
+
+
+
+
+    <style>
+        /*
+            10. 마우스 반응 선택자 
+                1) hover  : 마우스 가져다 대는 동안
+                2) active : 마우스를 누르고 있는 동안
+        */
+        .link:hover {
+            color: orangered;
+        }
+        .link:active { /* hover 밑에 있어야 적용된다.(순서) */
+            color: palevioletred;
+        }
+
+    </style>
+    <a class="link" href="javascript:void(0)">클릭</a>
+
+
+
+
+    <style>
+        /*
+            11. 상태 선택자
+                1) :focus ★★    선택했을 때
+                2) :checked     체크했을 때
+        */
+        #name:focus {
+            background-color: rgb(227, 234, 153);
+        }
+        .register > div > input[name=gender]:checked + label {
+            font-weight: bold;
+        }
+
+    </style>
+    <form class="register">
+        <div>
+            <label for="name">성명</label>
+            <input type="text" id="name">
+        </div>
+        <div>
+            <input type="radio" name="gender" value="1" id="male">
+            <label for="male">남자</label>
+            <input type="radio" name="gender" value="2" id="female">
+            <label for="female">여자</label>
+        </div>
     </form>
 </body>
 </html>
