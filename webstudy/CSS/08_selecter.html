@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style> /* 원래는 헤드태그에 작성!*/
+        /* 1. 태그 선택자 */
+        h1 {
+            color:teal;
+        }
+    </style>
+    <h1>HelloCSS</h1><hr/>
+
+
+
+
+
+    <style>
+        /* 2. 클래스 선택자 */
+        .box {
+            color:violet;
+        }
+    </style>
+    <div class="box">Nice to meet you!</div><hr/>
+
+
+
+
+
+    <style>
+        /* 아이디 선택자 */
+        #hello {
+            color : indianred;
+        }
+    </style>
+    <div id="hello">How are you?</div><hr/>
+
+
+
+
+
+    <style>
+        /* 자식 선택자 */
+        ul > li {
+            color: orangered;
+        }
+        ul > li > a {
+            color: orangered;
+            background-color: aqua;
+            text-decoration: none;
+        }
+
+        
+        li > a { /* 잘못된 접근 : 부모태그 > 후손태그 (x) */
+            color: black;
+        }
+    </style>
+    <ul>
+        <li> <!-- <li> : ul의 자식 태그 / <a> : ul의 후손 태그 -->
+            <a href="01_internal.html">01_internal.html</a>
+        </li>
+        <li>
+            <a href="02_external.html">02_external.html</a>
+        </li>
+        <li>
+            <a href="03_inline.html">03_inline.html</a>
+        </li>
+    </ul>
+
+
+
+
+
+    <style>
+        /* 5. 후손 선택자 */
+        dl strong {
+            color: mediumseagreen;
+        }
+
+    </style>
+    <dl>
+        <dt>
+            <strong>이름</strong>
+        </dt>
+        <dd>진라면</dd>
+        <dt>
+            <strong>조리법</strong>
+        </dt>
+        <dd>4분간 끓인다</dd>
+    </dl>
+
+
+
+    <style>
+        /* 6. 모든 형제 */
+        .asia > h3 ~ div {
+            color: indigo;
+        }
+    </style>
+    <div class="asia">
+        <h3>아시아</h3>
+        <div>한국</div>
+        <div>일본</div>
+        <div>중국</div>
+    </div>
+
+
+
+    <style>
+        /* 7. 인접 형제 */
+        .europe > h3 + div {
+            color:maroon;
+        }
+        .europe > div + div {
+            background-color: bisque;
+        }
+        .europe > h3 + h3 {
+            background-color: blue;
+        }
+    </style>
+    <div class="europe">
+        <div>이탈리아</div>
+        <h3>유럽</h3>
+        <div>영국</div>
+        <div>프랑스</div>
+        <h3>유럽2</h3>
+        <div>독일</div>
+    </div>
+
+
+
+
+    <style>
+        /*
+           8. 구조 선택자       ??ul 에도 적용될까?
+              1) :first-of-type     : 첫 번째 요소
+              2) :last-of-type      : 마지막 요소
+              3) :nth-of-type(n)    : n번째 요소
+        */
+        h4 + ol > li:nth-of-type(2) {
+            color: skyblue;
+            font-weight: 900;
+        }
+    </style>
+    <h4>오늘 먹을 점심 메뉴</h4>
+    <ol>
+        <li>돈까스</li>
+        <li>냉면</li>
+        <li>김치찌개</li>
+        <li>두루치기</li>
+    </ol>
+
+
+
+
+    <style>
+        /*
+            9. 속성 선택자
+                1) 요소[속성] ★       속성을 가진 요소
+                2) 요소[속성=값] ★    '속성=값'인 요소
+                3) 요소[속성^=값]     속성이 값으로 '시작'하는 요소
+                4) 요소[속성$=값] ☆   속성이 값으로 '끝'나는 요소 (* 주로 이미지 파일 .jpg .png ...)
+                5) 요소[속성*=값]     속성이 값을 '포함'하는 요소
+        */
+        form > input[placeholder] {
+            color: blue;
+            background-color: lightgray;
+        }
+
+        form > input[type=password] {
+            color: blue;
+            background-color: blueviolet;
+        }
+    </style>
+    <form>
+        <input type="text" placeholder="ID"><br/>
+        <input type="password">
+    </form>
+</body>
+</html>
