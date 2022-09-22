@@ -10,20 +10,19 @@
 </head>
 <body>
     <style>
-
-        * {
+        * { /* 기본세팅 1 */
             padding: 0;
             margin: 0;
         }
-        a {
+        a { /* 기본세팅 2 */
             color: #000;
             text-decoration: none;
         }
         ul {
             border-top: 1px solid gray;
             border-bottom: 1px solid gray;
-            list-style: none; /* ★ 글머리 기호 없애기 */
-            display: flex;    /* 메뉴들의 수평 레이아웃 배치 */
+            list-style: none;     /* ★ 글머리 기호 없애기 */
+            display: flex;        /* 메뉴들의 수평 레이아웃 배치 */
         }
         ul > li {
             width: 80px;          /* 너비 */
@@ -32,14 +31,14 @@
             line-height: 50px;    /* 세로 가운데 정렬 */
         }
         ul > li > a {
-            display: block; /* 블록레벨의 요소만 너비/높이를 가질 수 있다. */
-            width: 100%;    /* 부모 요소 li와 같은 너비 */
-            height: 100%;   /* 부모 요소 li와 같은 높이 */
+            display: block;       /* 블록레벨의 요소만 너비/높이를 가질 수 있다. */
+            width: 100%;          /* 부모 요소 li와 같은 너비 */
+            height: 100%;         /* 부모 요소 li와 같은 높이 */
         }
 
         ul > li:hover {
             border-bottom: 3px solid limegreen;
-            height: 47px;   /* 밑줄(border-bottom) +3px 됬을 때 50px 유지! */
+            height: 47px;         /* 밑줄(border-bottom) +3px 됬을 때 50px 유지! */
         }
         ul > li:hover > a {
             color: limegreen;
