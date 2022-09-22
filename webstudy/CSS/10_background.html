@@ -152,29 +152,31 @@
 
 
     <style>
-        .box10 {
+        .img_box {
             /* 에펠탑 이미지 */
-            width: 1920px;
-            height: 1270px;
-            background-image: url(../../images/eiffeltower.jpg);
-            background-size:cover;
+            box-sizing: border-box;
+            width: 640px;
+            height: 480px;
             margin: 0 auto;
+            background-image: url(../../images/eiffeltower.jpg);
+            background-position: center;
+            background-size:cover;
         }
 
-        .box11 {
-            width: 1920px;
-            height: 150px;
-            border: 10px solid blue;
-            border-radius: 30px;
+        .img_desc {
+            box-sizing: border-box;
+            width: 640px;
+            padding: 10px 0; /* height 없이 상하 padding을 통해 세로 가운데 정렬 */
+            border: 5px solid blue;
+            border-radius: 10px;
             background-color: skyblue;
-            margin: 100px auto 0;
-            font-size: 80px;
+            margin: 20px auto 0;
+            font-size: 24px;
             text-align: center;
-            padding-top: 10px;
             
         }
     </style>
-    <div class="box10"></div>
-    <div class="box11"><strong>에펠탑</strong></b>
+    <div class="img_box"></div>
+    <div class="img_desc"><strong>에펠탑</strong></b>
 </body>
 </html>
