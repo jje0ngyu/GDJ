@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 50px;
+            background-color: salmon;
+            border: 1px solid gray;
+            /* overflow: scroll      내용물이 영역을 벗어나면 스크롤 바를 생성 */
+            overflow: scroll;
+        }
+        .box2 {
+            width: 200px;
+            height: 50px;
+            background-color: gold;
+            border: 1px solid gray;
+            /* overflow-x:scroll    가로 방향의 스크롤 바를 생성 */
+            overflow-x: scroll;
+        }
+        .box3 {
+            width: 200px;
+            height: 50px;
+            background-color: lime;
+            border: 1px solid gray;
+            /* overflow:hidden    영역을 벗어난 내용물을 모두 제거 */
+            overflow: hidden;
+        }
+
+       
+    </style>
+    <div class="box1">BOX1 : overflow:scroll
+        Vivamus id eleifend leo. Sed a viverra magna. Donec consequat ex non justo aliquam efficitur. Aenean varius nisl ac massa bibendum, et posuere enim ullamcorper. Suspendisse eleifend vel nunc non consequat. Cras sodales lobortis purus sodales pulvinar. Mauris sollicitudin venenatis eros, ut dictum odio molestie ac. Suspendisse venenatis nec leo sed pulvinar. Nunc vehicula, turpis nec dictum pretium, sapien est consequat purus, sed faucibus nisl metus in dolor. Duis a iaculis est, id semper tellus. Mauris eu augue ligula. Phasellus dolor dui, faucibus vitae justo id, auctor condimentum nisi. Nulla finibus imperdiet risus nec faucibus. Etiam id finibus tellus.
+    </div>
+    <div class="box2">BOX2
+        Vivamus id eleifend leo. Sed a viverra magna. Donec consequat ex non justo aliquam efficitur. Aenean varius nisl ac massa bibendum, et posuere enim ullamcorper. Suspendisse eleifend vel nunc non consequat. Cras sodales lobortis purus sodales pulvinar. Mauris sollicitudin venenatis eros, ut dictum odio molestie ac. Suspendisse venenatis nec leo sed pulvinar. Nunc vehicula, turpis nec dictum pretium, sapien est consequat purus, sed faucibus nisl metus in dolor. Duis a iaculis est, id semper tellus. Mauris eu augue ligula. Phasellus dolor dui, faucibus vitae justo id, auctor condimentum nisi. Nulla finibus imperdiet risus nec faucibus. Etiam id finibus tellus.
+    </div>
+    <div class="box3">BOX3
+        Vivamus id eleifend leo. Sed a viverra magna. Donec consequat ex non justo aliquam efficitur. Aenean varius nisl ac massa bibendum, et posuere enim ullamcorper. Suspendisse eleifend vel nunc non consequat. Cras sodales lobortis purus sodales pulvinar. Mauris sollicitudin venenatis eros, ut dictum odio molestie ac. Suspendisse venenatis nec leo sed pulvinar. Nunc vehicula, turpis nec dictum pretium, sapien est consequat purus, sed faucibus nisl metus in dolor. Duis a iaculis est, id semper tellus. Mauris eu augue ligula. Phasellus dolor dui, faucibus vitae justo id, auctor condimentum nisi. Nulla finibus imperdiet risus nec faucibus. Etiam id finibus tellus.
+    </div><hr/>
+
+
+
+
+    <style>
+         .box4 {
+            width: 200px;
+            height: 50px;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+        .box4 > div {
+            width: 150px;
+            height: 40px;
+            border: 1px solid black;
+        }
+    </style>
+    <div class="box4">BOX3
+        <div>BOX1</div>
+        <div>BOX4</div>
+        <div>BOX4</div>
+        <div>BOX1</div>
+    </div>
+
+</body>
+</html>

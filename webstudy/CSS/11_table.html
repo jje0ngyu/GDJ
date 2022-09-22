@@ -85,6 +85,126 @@
                 </tr>
             </tbody>
         </table>
+    </div><hr/>
+
+
+
+
+
+
+    <style>
+        /* 달력 제목 */
+        h2 {
+            width:fit-content;
+            margin: auto;
+        }
+        .box2 > h2 > span {
+            color: blue;
+            font-size: 52px;
+        }
+
+        /* 달력 날짜 칸 너비/높이 */
+        .box2 > table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+
+        .box2 > table > thead {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        
+        .box2 > table > tbody td:nth-of-type(n) {
+            width: 80px;
+            height: 100px;
+        }
+        
+        .box2 > table td {
+            border: 1px solid black;
+            vertical-align: top;
+            padding: 10px;
+        }
+
+        /* 글자색 */
+        .prev, .next {
+            color: silver;
+        }
+        .sat {
+            color: blue;
+        }
+        .holiday {
+            color: red;
+        }
+
+        /* 호버 */
+        .box2 > table td:hover {
+            background-color: antiquewhite;
+        }
+    </style>
+    <div class="box2">
+        <h2 class="title">2022 <span calss="month">9</span> September</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td class="holiday">SUN</td>
+                    <td>MON</td>
+                    <td>TUE</td>
+                    <td>WED</td>
+                    <td>THU</td>
+                    <td>FRI</td>
+                    <td class="sat">SAT</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="prev">28</td>
+                    <td class="prev">29</td>
+                    <td class="prev">30</td>
+                    <td class="prev">31</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td class="sat">3</td>
+                </tr>
+                <tr>
+                    <td class="holiday">4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td class="holiday">9</td>
+                    <td class="holiday">10</td>
+                </tr>
+                <tr>
+                    <td class="holiday">11</td>
+                    <td class="holiday">12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td class="sat">17</td>
+                </tr>
+                <tr>
+                    <td class="holiday">18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td class="sat">24</td>
+                </tr>
+                <tr>
+                    <td class="holiday">25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td class="next">1</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </body>
 </html>
