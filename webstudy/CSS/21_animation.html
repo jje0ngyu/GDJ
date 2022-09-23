@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        /*
+            밴더 프리픽스 (크로스 브라우징) 지원
+            @-webkit-keyframes : 크롬, 사파리
+            @-moz-keyframes    : 파이어폭스
+            @-o-keyframes      : 오페라
+            @-ms-keyframes     : 익스플로러
+        */
+        @keyframes my_animation {
+            /* 애니메이션 시작 : from (0%) */
+            from {
+                background-color: crimson;
+                opacity: 0; /* 투명(안보임) */
+            }
+            /* 애니메이션 종료 : to (100%) */
+            to {
+                background-color: orange;
+                opacity: 1; /* 불투명(완전 보임) */
+            }
+        }
+        .box1 {
+            width: 100px;
+            height: 100px;
+            /* 애니메이션 속성 */
+            animation-name: my_animation;       /* 실행할 애니메이션 이름 */
+            animation-duration: 3s;              /* 애니메이션 실행 시간 (3초) */
+            animation-timing-function: ease;     /* 애니메이션 동작 시간 배분 */
+            animation-iteration-count: infinite; /* 애니메이션 동작 횟수 */
+
+        }
+    </style>
+    <div class="box1">
+        BOX1
+    </div><hr/>
+
+
+
+
+
+    <style>
+        @keyframes moving_animation {
+            0% {margin-left: 0;}
+            100% {margin-left: 300px;}
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            animation-name: moving_animation;
+            animation-duration: 3s;
+            animation-delay: 1s;            /* 1초 딜레이 후 애니메이션 시작 */
+            animation-direction: alternate; /* 애니메이션 방향 변경 */
+            animation-iteration-count: infinite;
+        }
+    </style>
+    <div class="box2">
+        BOX2
+    </div><hr/>
+
+    <style>
+        @keyframes rainbow {
+            0% {background-color: red;}
+            14% {background-color: orangered;}
+            28% {background-color: gold;}
+            42% {background-color: green;}
+            56% {background-color: skyblue;}
+            70% {background-color: blue;}
+            84% {background-color: blueviolet;}
+            100% {background-color: red;}
+        }
+        .box3 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            /* 애니메이션 단축 속성 */
+            animation: rainbow 1s ease-in-out infinite;
+        }
+    </style>
+    <div class="box3">
+        BOX3
+    </div><hr/>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+        /* 초기화 (reset) */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, footer, header, nav, section, {
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            box-sizing: border-box;
+        }
+        .main, .user {
+            display: flex;
+        }
+        .main .icon {
+            background-color: gray;
+            border-radius: 5px 0 0 0;
+            margin: 10px 0;
+            width: 20px;
+            height: 25px;
+            text-align: center;
+            display: block;
+        }
+        .main .text {
+            border: 1px solid black;
+            border-left: none;
+            border-radius: 0 0 5px 0;
+            margin: 10px 10px 10px 0;
+        } 
+        input {
+            border: none;
+            outline: none;
+        }
+        .login {
+            display: block;
+            background-color: gray;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+            width: 100px;
+            height: 70px;
+            line-height: 70px;
+        }
+        button {
+            border: none;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <form class="main">
+        <section class="left_section">
+            <div class="user">
+                <div class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="text">
+                    <input type="text" placeholder="Username">
+                </div>
+            </div>
+            <div class="user">
+                <div class="icon">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <div class="text">
+                    <input type="password" placeholder="비밀번호">
+                </div>
+            </div>
+        </section>
+
+        <section class="right_section">
+            <div class="login">
+                <button>로그인</button>
+            </div>
+        </section>
+    </form>
+</body>
+</html>
