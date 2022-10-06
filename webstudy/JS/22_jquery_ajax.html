@@ -167,10 +167,11 @@
                                 )
                             );
                             tr.append($('<td>').html($(item).find('author').text()));
-                            tr.append($('<td>').html($(item).find('price').text()));
-                            tr.append($('<td>').html($(item).find('discount').text()));
+                            tr.append($('<td>').html($('<strike>').text($(item).find('price').text() + '원')));
+                            tr.append($('<td>').html($('<span>').text($(item).find('discount').text() + '원').css('color', '#ff0000')));
                             tr.append($('<td>').html($(item).find('publisher').text()));
-                            tr.append($('<td>').html($(item).find('pubdate').text()));
+                            var pubdate = $(item).find('pubdate').text();
+                            tr.append($('<td>').html(pubdate.substring(0,4) + '-' + pubdate.substring(4,6) + '-' + pubdate.substring(6)));
                             tr.append($('<td>').html($(item).find('isbn').text()));
                             tr.append($('<td>').html($(item).find('description').text()));
                             //$('#box4 #search_list').append(tr);
@@ -179,30 +180,44 @@
                 }
             });
         });
-        
-     </script>
+     </script><hr/>
 
 
 
 
 
  <!-- 4. XML 읽기 연습 - sfc_web_map.xml // 알아서하기 -->
- <div><button id="btn5">클릭</button></div>
+ <div><button id="btn5">4.클릭(XML)</button></div>
  <div id="box5">
-     <table border="1">
-         <thead>
-             <tr>
-                 <td>지역명</td>
-                 <td>날씨</td>
-                 <td>온도</td>
-             </tr>
-         </thead>
-         <tbody id="weather"></tbody>
-     </table>
- </div>
- <script>
-    
- </script><hr/>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>지역명</td>
+                    <td>날씨</td>
+                    <td>온도</td>
+                </tr>
+            </thead>
+            <tbody id="weather"></tbody>
+        </table>
+    </div>
+    <script>
+        $('#btn5').on('click', function(event){
+            $.ajax({
+                'type': 'GET',
+                'url': 'sfc_web_map.xml',
+                'dataType': 'xml',
+                'success': function(data){
+                    $.each($(data).find('local'), function(i, region){
+                        var tr = '<tr>';
+                        tr += '<td>' + $(region).text();
+                        tr += '<td>' + $(region).attr('desc');
+                        tr += '<td>' + $(region).attr('ta');
+                        $('#weather').append(tr);
+                    })
+                }
+            })
+        });
+    </script><hr/>
 
 
 
@@ -258,8 +273,25 @@
 <!-- 6. JSON 읽기 -->
 <div><button id="btn7">CCTV 클릭</button></div>
 <script>
-    
+    $('#btn7').on('click', function(event){
+        $.ajax({
+            type: 'GET',
+            url: 'car.json',
+            dataType: function(data){
+                console.log('모델명', data.model);
+                console.log('제조사', data.maker);
+                console.log('가격', data.price);
+                $.each(data.option, function(i, item){
+                    console.log('옵션' + (i + 1), item);
+                })
+                console.log('연식', data.info.year);
+                console.log('할인액', data.info.discount);
+            }
+        });
+    })
 </script><hr/>
+
+
 
     <!-- 7. JSON 읽기 연습 - cctv.json -->
     <!-- 전체 cctv는 몇 대인가? -->
@@ -274,9 +306,11 @@
                 url:'cctv.json',
                 dataType:'json',
                 success: function(data){
-                    $.each(data, function(i, cctv){
-                        var tr = $()
+                    var cctvCount = 0;
+                    $.each(data, function(i, location){
+                        cctvCount += Number(location.카메라대수);
                     })
+                    $('#cctv_count').text(cctvCount);
 
                 }
             })
