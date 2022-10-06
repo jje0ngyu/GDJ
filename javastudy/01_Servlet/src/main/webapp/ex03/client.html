@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- 1. GET 방식 요청 : <a> 태그 -->
+	<div>
+		<a href="http://localhost:9090/01_Servlet/AnchorServlet">정상링크1</a>
+	</div>
+	<div>	<!-- ★★★ "/컨텍스트 패스" 먼저 작성하여, 아래와 같이 주소를 작성한다!! -->
+		<a href="/01_Servlet/AnchorServlet">(추천)정상링크2</a> 
+	</div>
+	<div>
+		<a href="/AnchorServlet">불량링크1 (슬래시(/)로 시작하면 컨텍스트 패스로 인식)</a>
+	</div>
+	<!-- / 가 있으면 contextPath 로 인식, / 가 없으면 URLMapping으로 인식 -->
+	<div>
+		<a href="01_Servlet/AnchorServlet">불량링크2 (컨텍스트 패스는 슬래시(/)로 시작해야 한다.)</a>	
+	</div>
+	<div>
+		<a href="AnchorServlet">불량링크3 (URL맵핑으로 인식되지만 HTML 문서의 경로에 따라 실행 여부가 다르다.)</a>
+	</div>
+
+
+
+	<!-- 연습 -->
+	<!-- 응답 : 1+2=3 -->
+	<div>
+		<a href="/01_Servlet/AnchorServlet?a=1&b=2">더하기</a>
+		
+	</div>
+</body>
+</html>
