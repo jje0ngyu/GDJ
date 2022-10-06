@@ -3,9 +3,15 @@
 
 document.getElementById('btn_signin').onclick = function(event){
     var pw = document.getElementById('pw');
+    var id = document.getElementById('id');
     if (pw.value == '') {
         alert('비밀번호를 입력하세요.');
         event.preventDefault(); // 'btn_signin' 의 기본동작인 submit을 막는다.
+        return false;
+    }
+    if (id.value.length <= 4){
+        alert('아이디는 4자 이상입니다.');
+        event.preventDefault();
         return false;
     }
 }
