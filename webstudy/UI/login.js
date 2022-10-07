@@ -21,7 +21,7 @@ document.getElementById('id').onkeyup = function(event){
     var id_msg = document.getElementById('id_msg');
     if (id.value.length == 0){
         id_msg.textContent = '';
-    } else if(id.value.length <= 4){
+    } else if(id.value.length < 4){
         id_msg.textContent = '아이디는 4자 이상입니다.';
     } else if(id.value.length >= 4){
         id_msg.textContent = '정상적인 아이디입니다.';
