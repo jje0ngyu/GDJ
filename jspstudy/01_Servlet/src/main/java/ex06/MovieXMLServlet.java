@@ -39,8 +39,8 @@ public class MovieXMLServlet extends HttpServlet {
 		String display = request.getParameter("display");
 		//* ㄴㄴ : int display = Integer.parseInt(request.getParameter("display"));
 		
-		// 검색어 UTF-8 인코딩
 		try {
+			// 검색어 UTF-8 인코딩
 			query = URLEncoder.encode(query, "UTF-8");
 		} catch(UnsupportedEncodingException e) {
 			response.setContentType("text/plain; charset=UTF-8");

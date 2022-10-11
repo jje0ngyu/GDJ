@@ -10,13 +10,13 @@
 
 	<div>
 		<input type="text" id="query" placeholder="검색어 입력">
-		<select id = "display">
+		<!-- <select id = "display">
 			<option value="10">10</option>
 			<option value="20">20</option>
 			<option value="50">50</option>
 			<option value="100">100</option>
-			<!-- 버튼의 속성이 'submit'이 아니기 때문에 name 속성은 필요없다. -->
-		</select>
+			버튼의 속성이 'submit'이 아니기 때문에 name 속성은 필요없다.
+		</select> -->
 		<input type="button" id="btn1" value="검색">
 	</div>
 	<div>
@@ -71,8 +71,35 @@
 		};
 		
 		function fn_getJSON(){
+			$.ajax({
+				/* 요청 */
+				type : 'get',
+				url  : '/01_Servlet/MovieJSONServlet',
+				data : 'query=' + $('#query').val(),
+				
+				/* 응답 */
+				dataType: 'json',
+				success : function(resData){
+					$('#movies').empty();
+					$.each($(resData).find('item'), function(i, item){
+						var tr = $('<tr>');
+						tr.append($('<td>').html($(item).find('title').text()));
+						tr.append($('<td>').html($(item).find('subtitle').text()));
+						tr.append($('<td>').html($('<a>').attr('href', $(item).find('link').text()().html($('<img>').attr('width','80px').attr('height', '120px').attr('src', $(item).find('image').text())))));
+						tr.append($('<td>').html($(item).find('pubDate').text()));
+						tr.append($('<td>').html($(item).find('director').text()));
+						tr.append($('<td>').html($(item).find('actor').text()));
+						tr.append($('<td>').html($(item).find('userRating').text()));
+						tr.appendTo('#movies');
+					});
+				},
+				error   : function(jqXHR){
+					console.log('status : ' + jqXHR.status);
+					console.log('responseText : ' + jqXHR.responseText);
+				}
+			});
 			
-		}
+		};
 	</script>
 
 </body>
