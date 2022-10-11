@@ -10,6 +10,13 @@
 
 	<div>
 		<input type="text" id="query" placeholder="검색어 입력">
+		<select id = "display">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<!-- 버튼의 속성이 'submit'이 아니기 때문에 name 속성은 필요없다. -->
+		</select>
 		<input type="button" id="btn1" value="검색">
 	</div>
 	<div>
@@ -30,23 +37,42 @@
 	</div>
 	<script>
 		$('#btn1').on('click', function(event){
+			// fn_getXML();
+			fn_getJSON();
+		});
+		
+		function fn_getXML(){
 			$.ajax({
 				/* 요청 */
-				type : 'get',
-				url  : '/01_Servlet/MovieServlet',
-				data : 'query=' + $('#query').val(),
-				
+				type: 'GET',
+				url: '/01_Servlet/MovieXMLServlet',
+				data: 'query=' + $('#query').val() + '&display=' + $('#display').val(),
 				/* 응답 */
-				dataType: 'xml', // xml, json 가능
-				success : function(resData){
-					
+				dataType: 'xml',  // xml, json 가능
+				success: function(resData){
+					$('#movies').empty();
+					$.each($(resData).find('item'), function(i, item){
+						var tr = $('<tr>'); // tr 만들기
+						tr.append($('<td>').html($(item).find('title').text()));
+						tr.append($('<td>').html($(item).find('subtitle').text()));
+						tr.append($('<td>').html($('<a>').attr('href', $(item).find('link').text()).html($('<img>').attr('width','80px').attr('height','120px').attr('src', $(item).find('image').text()))));
+						tr.append($('<td>').html($(item).find('pubDate').text()));
+						tr.append($('<td>').html($(item).find('director').text()));
+						tr.append($('<td>').html($(item).find('actor').text()));
+						tr.append($('<td>').html($(item).find('userRating').text()));
+						tr.appendTo('#movies');
+					});
 				},
-				error   : function(jqXHR){
-					console.log("status :" + jqXHR.status);
-					console.log("responseText : " + jqXHR.responseText);
+				error: function(jqXHR){
+					console.log('status : ' + jqXHR.status);
+					console.log('responseText : ' + jqXHR.responseText);
 				}
 			});
-		});
+		};
+		
+		function fn_getJSON(){
+			
+		}
 	</script>
 
 </body>
