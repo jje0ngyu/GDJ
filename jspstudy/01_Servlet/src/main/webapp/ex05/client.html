@@ -28,11 +28,66 @@
 			    },
 			    error: function(jqXHR){		// 예외 발생 시 예외 정보가 jqXHR 객체에 전달된다.  (* jq = jquery XHR = XmlHttpResourse)
 			    	$('#box1').append('status : ' + jqXHR.status + '<br>');
-					$('#box1').append('statusText : ' + jqXHR.statusText + '<br>');
 					$('#box1').append(jqXHR.responseText);
 			    }
 		    });
 		});
+	</script><hr />
+	
+	<div><button id="btn2">클릭</button></div>
+	<div id="box2"></div>
+	<script>
+		$('#btn2').on('click', function(event){
+			var box2 = $('#box2');
+			box2.empty();
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url : '/01_Servlet/JSONServlet',
+				data: 'name=민경태&age=45',
+				/* 응답 */
+				dataType: 'json',
+				success : function(resData){	// resData는 JSON 데이터가 응답되므로 자바스크립트 객체로 처리하면 된다.
+					box2.html('<h1>이름 : ' + resData.name + ', 나이 : ' + resData.age + '살</h1>');
+					
+				},
+				error   : function(jqXHR){
+					box2.append('status : ' + jqXHR.status + '<br>');
+					box2.append(responseText);
+				}
+			});
+		});
+	</script><hr />
+	
+	<div><button id="btn3">클릭</button></div>
+	<div id="box3"></div>
+	<script>
+	 $('#btn3').on('click', function(evnet){
+	 	var box3 = $('#box3');
+		 box3.empty();
+		 $.ajax({
+			 /* 요청 */
+			type: 'get',
+			url : '/01_Servlet/XMLServlet',
+			data: 'name=민경태&age=45',
+			
+			/* 응답 */
+			dataType: 'xml',
+			success : function(resData){
+				// ★★★ XML 처리는 이곳이 중요하다! (데이터 출력하기)
+				var ul = $('<ul>');
+				ul.append($('<li>').text($(resData).find('name').text()));
+				ul.append($('<li>').text($(resData).find('age').text()));
+				//* find() 메소드는 jquery에서만 호출 가능하므로, jqueryWrapper를 사용한다.
+				ul.appendTo(box3);
+				
+			},
+			error   : function(jqXHR){
+				box3.append('status : ' + jqXHR.status + '<br>');
+				box3.append(responseText);
+			}
+		 });
+	 });
 	</script>
 </body>
 </html>
