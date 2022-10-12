@@ -1,4 +1,4 @@
-package ex05;
+package ex06_ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 @WebServlet("/JSONServlet")
+
 public class JSONServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package ex05;
+package ex06_ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +15,7 @@ import org.json.XML;
 @WebServlet("/XMLServlet")
 
 public class XMLServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
 	
