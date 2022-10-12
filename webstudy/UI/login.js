@@ -22,9 +22,10 @@ document.getElementById('id').onkeyup = function(event){
     if (id.value.length == 0){
         id_msg.textContent = '';
     } else if(id.value.length < 4){
+        document.getElementById('id_msg').style.color = "red";
         id_msg.textContent = '아이디는 4자 이상입니다.';
     } else if(id.value.length >= 4){
+        document.getElementById('id_msg').style.color = "blue";
         id_msg.textContent = '정상적인 아이디입니다.';
     }
 }
-// jquery 로 작성된 것 옮기기

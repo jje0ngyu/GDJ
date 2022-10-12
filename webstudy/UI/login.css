@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Malgun Gothic, sans-serif;
 }
 a {
     text-decoration: none;
     color: #000;
+}
+body {
+    background-color: #F5F6F7;
 }
 .container {
     width: 460px;
@@ -26,23 +30,30 @@ header {
     height: 50px;
     padding: 0 10px;
     margin-bottom: 5px;
-    border: 2px solid #070;
+    border: 2px solid #0F0;
     outline: 0;
 }
 .input_area > input:focus {
     border: 2px solid #FF8800;
 }
+#id_msg {
+    font-size: 14px;
+}
+
 .btn_signin {
     width: 100%;
     height: 60px;
     margin: 15px 0;
-    background-color: #070;
+    background-color: #0F0;
     color: #FFF;
     font-weight: 900;
     font-size: 20px;
     text-align: center;
     line-height: 60px;
     border: 0;
+}
+.btn_signin:hover {
+    cursor: pointer;
 }
 footer {
     display: flex;
