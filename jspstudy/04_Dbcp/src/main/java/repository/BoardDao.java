@@ -137,7 +137,7 @@ public class BoardDao {
 	
 	
 	
-	
+	//* DML (INSERT, UPDATE, DELETE 는 executeUpdate() 사용 !
 	// 4. 게시글 삽입
 	public int insertBoard(Board board) {
 		int result = 0;
@@ -152,7 +152,7 @@ public class BoardDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(con, ps, null); //* rs 값은 select문에서만 사용하므로, 여기서는 null값으로 작성한다.
+			close(con, ps, null); //* rs 값은 select문에서만 사용하므로, 여기서는 null값으로 작성한다. (사용하지 않았으므로 'null'입력)
 		}
 		return result;
 		
@@ -179,6 +179,30 @@ public class BoardDao {
 			close(con, ps, null);
 		}
 		return result;
+	}
+	
+	
+	
+	
+	
+	
+	// 6. 게시글 삭제
+	//* 삭제한 게시글의 번호(PK)가 입력되기 때문에 int
+	public int deleteBoard(int board_no) {
+		int result = 0;
+		try {
+			con = dataSource.getConnection();
+			sql = "DELETE FROM BOARD WHERE BOARD_NO=?";
+			ps  = con.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			result = ps.executeUpdate();	// DELETE문은 executeUpdate() 메소드 사용
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+		return result;
+		
 	}
 	
 
