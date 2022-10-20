@@ -11,18 +11,25 @@
 <script>
 	
 	$(document).ready(function(){
+		// 편집버튼
+		$('#btn_edit').click(function(event){
+			location.href = '${contextPath}/board/edit.do?boardNo=${board.boardNo}';
+		});
 		
+		// 삭제버튼
 		$('#btn_remove').click(function(event){
 			if(confirm('게시글을 삭제할까요?')){
-				location.href = "${contextPath}/board/remove.do?boardNo=${board.boardNo}";
+				location.href = '${contextPath}/board/remove.do?boardNo=${board.boardNo}';
 			} else {
 				alert('취소되었습니다.')
 			}
 		});
 		
+		// 목록버튼
 		$('#btn_list').click(function(event){
 			location.href = '${contextPath}/board/list.do';
 		});
+		
 	});
 	
 </script>

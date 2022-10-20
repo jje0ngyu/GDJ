@@ -41,7 +41,7 @@ public class BoardDetailService implements BoardService {
 			return af;
 		}
 		
-		return null;	// Java 문법으로 인해 남겨둔 코드 (실행되지 않는다.)
+		return null;	// 컨트롤러로 null을 반환하면 컨트롤러는 Redirect & Forward 모두 수행하지 않는다.
 		//* else 에는 return이 있으나, if문에는 return이 없기 때문에 오류 표지를 방지하기 위해 작성.
 	}
 

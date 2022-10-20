@@ -21,6 +21,21 @@
 	h1 {
 		text-align: center;
 	}
+	
+	.btn_write {
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		margin: 40px auto 20px;
+		color: #fff;
+		cursor: pointer;
+		border-radius : 10px;
+		background-color: teal;
+	}
+	.btn_write:hover {
+		background-color: orange;
+	}
 	ul {
 		list-style: none;
 		display: flex;
@@ -36,7 +51,7 @@
 		margin-right: 10px;
 		text-align: center;
 		border: 1px solid gray;
-		border-radius: 5px;
+		border-radius: 10px;
 	}
 	ul > li > a {
 		display: block;
@@ -63,7 +78,7 @@
 
 	<h1>게시글 목록 보기</h1>
 	
-	<div id="btn_write">추가</div>
+	<div id="btn_write" class="btn_write">추가</div>
 	
 	<ul>
 		<c:forEach items="${boards}" var="b">
