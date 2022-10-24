@@ -19,21 +19,25 @@ public class JSONServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 요청
+		// 1. 요청
 		request.setCharacterEncoding("UTF-8");
 		
 		String name = request.getParameter("name");
 		String age = request.getParameter("age");
 		//* 예외처리는 생략...
 		
-		// 응답할 JSON 객체 만들기
+		
+		
+		// 2. 응답할 JSON 객체 만들기
 		JSONObject obj = new JSONObject();
 		//* 내용 입력/저장 : put() 사용!
 		//* put(불러올 값, 저장할 값);
 		obj.put("name", name);
 		obj.put("age", age);
 		
-		// 응답
+		
+		
+		// 3. 응답
 		response.setContentType("application/json; charset=UTF-8");
 		// JSON 데이터의 MIME-TYPE
 		//* client.html 에 입력한 "dataType: json" 에 맞춰서 작성한다.
