@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>학생 조회</title>
+<title>${student.stuNo}번 학생 조회</title>
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script>
 

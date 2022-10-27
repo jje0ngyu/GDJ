@@ -14,7 +14,7 @@ public class SpringMain {
       // 새로운 프레임워크
       // 프레임워크가 만든 Bean을 가져다 쓴다.
 	   
-	  // XML에 저장된 Bean 가져오는 클래스
+	  // XML에 저장된 Bean 가져오는 클래스 ○○○
 	  // GenericXmlApplicationContext
 	  // ClassPathXmlApplicationContext
       AbstractApplicationContext ctx = new GenericXmlApplicationContext("xml01/appCtx.xml");

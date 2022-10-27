@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="human" class="com.gdu.app01.xml06.Person">
+		<!-- List -->
+		<property name="hobbies">
+			<!-- arrayList 값을 가져올 땐, list 태그를 사용하면 된다. -->
+			<list>
+				<value>여행</value>
+				<value>운동</value>
+			</list>
+		</property>
+		
+		<!-- Set : * Set은 중복데이터는 허용하지 않는다. 인덱스(순서)가 없다.
+		           * Set 과 List 는 Collection에서 파생되어 비슷하다.-->
+		<property name="contacts">
+			<set>
+				<value>010-1111-1111</value>
+				<value>010-1111-1111</value>
+				<value>010-1111-1111</value>
+			</set>
+		</property>
+		
+		<!-- Map -->
+		<property name="friends">
+			<map>
+				<entry key="동네친구" value="영심이" />
+				<entry key="학교친구" value="인절미" />
+				<entry key="학원친구" value="용샴이" />
+			</map>
+		</property>
+	</bean>
+
+</beans>

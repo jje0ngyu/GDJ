@@ -43,7 +43,7 @@
 	<%-- 4. 배열 --%>
 	<%
 	String[] menus = {"튀김", "떡볶이", "순대"};
-			pageContext.setAttribute("menus", menus);
+		pageContext.setAttribute("menus", menus);
 	%>
 	<c:forEach var="menu" items="${menus}" varStatus="vs">
 		인덱스 : ${vs.index}, 순번 : ${vs.count}, 배열요소 : ${menu}<br/>
@@ -54,7 +54,7 @@
 	<%-- 5. 리스트 --%>
 	<%
 	List<String> seasons = Arrays.asList("봄", "여름", "가을", "겨울");
-			pageContext.setAttribute("seasons", seasons);
+		pageContext.setAttribute("seasons", seasons);
 	%>
 	<c:forEach var="season" items="${seasons}" varStatus="k">
 	<!-- * varStatus의 이름은 아무렇게 지어도 된다. -->
@@ -66,9 +66,9 @@
 	<%-- 6. Map --%>
 	<%
 	Map<String, Integer> map = new HashMap<>();
-			map.put("begin", 1);
-			map.put("end", 10);
-			pageContext.setAttribute("map",	map);
+		map.put("begin", 1);
+		map.put("end", 10);
+		pageContext.setAttribute("map",	map);
 	%>
 	${map.begin} ~ ${map.end}<br/>
 	
@@ -77,10 +77,10 @@
 	<%-- 7. 객체 (반복이 필요한 건 아님 --%>
 	<%
 	Board board = new Board();
-			board.setBoardNo(1);
-			board.setTitle("도대체 언제까지...");
-			board.setHit(100);
-			pageContext.setAttribute("board", board);
+		board.setBoardNo(1);
+		board.setTitle("도대체 언제까지...");
+		board.setHit(100);
+		pageContext.setAttribute("board", board);
 	%>
 	${board.boardNo}, ${board.title}, ${board.hit}<br>
 	${board.getBoardNo()}, ${board.getTitle()}, ${board.getHit()}<br/>
