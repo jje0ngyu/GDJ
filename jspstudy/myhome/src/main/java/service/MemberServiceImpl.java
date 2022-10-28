@@ -96,7 +96,31 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void cancel(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		
+		// session에 저장된 login 정보에서 탈퇴할 회원의 정보를 추출
+		HttpSession session = request.getSession();
+		Member login = (Member)session.getAttribute("login");
+		int memberNo = login.getMemberNo();
+		
+		int result = MemberDao.getInstance().deleteMember(memberNo);
+		
+		try {
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			if (result > 0) {
+				// 탈퇴 성공하면 session 초기화
+				session.invalidate();
+				out.println("alert('이용해 주셔서 감사합니다.');");
+				out.println("location.href='"+ request.getContextPath() + "'");	// ContextPath() 로 이동은 첫 페이지로 이동을 의미한다.
+			} else {
+				out.println("alert('회원 탈퇴에 실패했습니다.');");
+				out.println("history.back();");
+			}
+			out.println("</script>");
+			out.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

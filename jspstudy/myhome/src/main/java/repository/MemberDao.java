@@ -49,7 +49,15 @@ public class MemberDao {
 		return result;
 	}
 	
-	
+	public int deleteMember (int memberNo) {
+		SqlSession ss = factory.openSession(false);
+		int result = ss.delete(mapper + "deleteMember", memberNo);
+		if (result > 0) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
 	
 	
 	

@@ -50,6 +50,13 @@ public class MemberController extends HttpServlet {
 		case "/member/register.me":
 			service.register(request, response);	// af 없이 register메소드 내부에서 직접 이동
 			break;
+		case "/member/cancle.me":
+			service.cancel(request, response);
+			break;
+		
+		// 매핑 잘못 작성한 경우
+		default:
+			System.out.println("매핑을 확인하세요.");
 		}
 		
 		// 어디로 어떻게 이동하는가?
