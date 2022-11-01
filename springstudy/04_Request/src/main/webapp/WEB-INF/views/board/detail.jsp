@@ -10,8 +10,8 @@
 
 	<h1>회원 상세보기</h1>
 	
-	<div>제목 ${title}</div> 
-	<div>조회수 ${hit}</div>
+	<div>제목 ${title}, ${board.title}</div> 
+	<div>조회수 ${hit}, ${board.hit}</div>
 
 </body>
 </html>
