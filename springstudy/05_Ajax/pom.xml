@@ -16,7 +16,13 @@
 	</properties>
 	
 	<dependencies>
-	
+		
+		<!-- #################################################################
+			■ JACKSON 을 사용하기 위한 dependency ■
+		
+			Q. 잭슨은 왜 사용하나요?
+			A. XML 파일을 JSON 타입으로 수월하게 변환하기 위해 사용합니다. 
+		  #################################################################### -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

@@ -11,42 +11,31 @@
 </head>
 <body>
 
-	<c:if test="${login == null}">	
-		<div>
-			<form method="post" action="${contextPath}/member/login.me">
-				<div>
-					<input type="text" name="id" placeholder="아이디">
-				</div>
-				<div>
-					<input type="password" name="pw" placeholder="패스워드">
-				</div>
-				<div>
-					<button>로그인</button>
-				</div>
-				<div>
-					<a href="${contextPath}/member/join.me">회원가입</a>
-				</div>
-			</form>
-		</div>
-	</c:if>
-	
-	<c:if test="${login != null }">
-		<div>
-			${login.name}님 어세오세요
-			<input type="button" value="로그아웃" onclick="location.href='${contextPath}/member/logout.me';">
-		</div>
-		<div>
-			<a id="cancle_link" href="${contextPath}/member/cancle.me">회원탈퇴</a>
-			<script>
-				$('#cancel_link').clink(function(event){
-					if(confirm('탈퇴하시겠습니까?')){
-						event.preventDefault();	// a 태그의 기본 동작(href로 이동)을 막는다.
-						return;
-					}
-				});
-			</script>
-		</div>
-	</c:if>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>공지번호</td>
+				<td>제목</td>
+				<td>작성일</td>				
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${notices}" var="notice">
+				<tr>
+					<td>${notice.noticeNo}</td>
+					<td>${notice.title}</td>
+					<td>${notice.createDate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+				
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 
 </body>
 </html>
