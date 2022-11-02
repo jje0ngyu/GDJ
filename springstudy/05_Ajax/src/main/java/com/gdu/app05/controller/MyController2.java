@@ -21,10 +21,10 @@ public class MyController2 {
 		return "board";	// board.jsp로 forward
 	}
 	
-	/***********************************************************************************/
-	
 	@Autowired
 	private BoardService boardService;
+	
+	/***********************************************************************************/
 	
 	
 	/* -------------------------------------------------
@@ -39,6 +39,10 @@ public class MyController2 {
 	
 	
 	
+	
+	
+	
+	
 	/* -------------------------------------------------
 	ResponseEntity 사용 2 : @RequestParam 이용하기
 	---------------------------------------------------- */
@@ -47,6 +51,10 @@ public class MyController2 {
 	public ResponseEntity<Board> detail2 (@RequestParam (value="title") String title, @RequestParam (value="content") String content) {
 		return boardService.execute2(title, content);
 	}
+	
+	
+	
+	
 	
 	
 	/* -------------------------------------------------

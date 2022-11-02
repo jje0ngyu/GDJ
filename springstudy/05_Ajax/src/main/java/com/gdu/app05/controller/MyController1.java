@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -77,20 +75,6 @@ public class MyController1 {
 		Map<String, Object> map = memberService.execute3(member);
 		return map;
 		// return memberService.execute3(member);
-	}
-	
-	/*
-		@RequestBody
-		" 안녕, 난 요청 데이터가 body에 포함되어 있다고 알려주는 일을 해.
-		요청 파라미터에서는 사용할 수 없고
-		post방식으로 파라미터 없이 데이터가 전달될 때 사용할 수 있어."
-	*/
-	
-	@ResponseBody
-	@PostMapping(value="member/detail4"
-			   , produces=MediaType.APPLICATION_JSON_VALUE)
-	public Member detail4(@RequestBody Member member) {
-		return memberService.execute4(member);
 	}
 	
 }

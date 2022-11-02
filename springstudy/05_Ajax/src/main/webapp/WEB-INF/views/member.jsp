@@ -96,38 +96,6 @@
 		
 	}  // function
 	
-	function fn_ajax4(){
-
-		$('#result').empty();
-		
-		$.ajax({
-			/* 요청 */
-			// JSON 데이터를 서버로 보낼 때는 반드시 POST 방식을 사용해야 한다.
-			type: 'post',
-
-			url : '${contextPath}/member/detail4',
-			
-			// data에 파라미터가 없음을 주의!
-			// 파라미터로 전달되지 않기 때문에 주소창을 이용한 GET 방식이 불가능하다.
-			data: JSON.stringify({
-				'id': $('#id').val(),
-				'pw': $('#pw').val()
-			}),
-			// 서버로 보내는 JSON 데이터의 MIME-TYPE을 작성
-			contextType: 'application/json',
-			/* 응답 */
-			dataType: 'json',
-			success : function(resData){
-				var ul = '<ul>';
-				ul += '<li>' + resData.id + '</li>';
-				ul += '<li>' + resData.pw + '</li>';
-				ul += '</ul>';
-				$('#result').html(ul);
-			}
-		}); // ajax
-		
-	}  // function
-	
 </script>
 </head>
 <body>
@@ -148,7 +116,6 @@
 			<input type="button" value="전송1" id="btn1">
 			<input type="button" value="전송2" id="btn2">
 			<input type="button" value="전송3" id="btn3">
-			<input type="button" value="전송4" id="btn4">
 		</div>
 		
 	</form>

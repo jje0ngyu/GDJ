@@ -20,7 +20,15 @@
 	
 	<div>
 		<a href="${contextPath}/movie">박스오피스</a>
-	</div>
+	</div><hr />
+	
+	<div>
+		<a href="${contextPath}/contact">연락처</a>
+	</div><hr />
+	
+	<div>
+		<a href="${contextPath}/gallery">갤러리</a>
+	</div><hr />
 
 </body>
 </html>
