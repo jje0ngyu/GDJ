@@ -62,11 +62,11 @@ public class BoardDAO {
 	
 	
 	
-	/* -----------------------------------------------------------------------
-	 가장 먼저 할 메소드 작업!
+	/* -------------------------------------------------------------------------------
+	 	가장 먼저 할 메소드 작업!
 	 
-	 	Connection을 열고(getConnection()), 닫는(close()) 메소드를 작성해준다. 
-	-------------------------------------------------------------------------- */
+	 		Connection을 열고(getConnection()), 닫는(close()) 메소드를 작성해준다. 
+	---------------------------------------------------------------------------------- */
 	private Connection getConnection() {
 		Connection con = null;
 		
@@ -132,23 +132,102 @@ public class BoardDAO {
 		return boards;
 	}
 	
+	
 	public BoardDTO selectBoardByNo(int board_no) {
 		BoardDTO board = null;
+		
+		try {
+			con = getConnection();
+			
+			sql = "SELECT BOARD_NO, TITLE, CONTENT, WRITER, CREATE_DATE, MODIFY_DATE FROM BOARD WHERE BOARD_NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				board = new BoardDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+			}
+				/*--------------------------------------------------------------------------------------------------
+					1개의 파일만 불러오는 것이므로, if문으로 작성하였다. (while문을 사용하여 반복할 필요가 없다.)
+				---------------------------------------------------------------------------------------------------- */
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 		
 		return board;
 	}
 	
+	
 	public int insertBoard(BoardDTO board) {
 		int result = 0;
+		try {
+			con = getConnection();
+			
+			sql = "INSERT INTO BOARD(BOARD_NO, TITLE, CONTENT, WRITER, CREATE_DATE, MODIFY_DATE)"
+				+ " VALUES(BOARD_SEQ.NEXTVAL, ?, ?, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))";
+				/* SQL 작성시 주의할 것 ------------------------------------------------------------------------------------------------------
+				 위와 같이 두 줄로 나눠서 작성할 때, 띄어쓰기에 유의한다. (두 줄의 코드를 한 줄로 나타냈을 때 띄어쓰기가 잘 되어 있는지 확인)
+				------------------------------------------------------------------------------------------------------------------------------ */
+			ps  = con.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setString(3, board.getWriter());
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 		return result;
 		
 	}
+	
+	
 	public int updateBoard (BoardDTO board) {
 		int result = 0;
+		try {
+			con = getConnection();
+			
+			sql = "UPDATE BOARD "
+				+ "SET TITLE=?, CONTENT=?, MODIFY_DATE=TO_CHAR(SYSDATE, 'YYYY-MM-DD') "
+				+ "WHERE BOARD_NO=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setInt(3, board.getBoard_no());
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 		return result;
 	}
-	public int removeBoard (int board_no) {
+	
+	
+	public int deleteBoard (int board_no) {
 		int result = 0;
+		try {
+			con = getConnection();
+			
+			sql = "DELETE FROM BOARD WHERE BOARD_NO=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		
+		}
 		return result;
 	}
 	

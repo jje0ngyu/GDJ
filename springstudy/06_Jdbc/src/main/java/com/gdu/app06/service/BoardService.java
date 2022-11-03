@@ -9,7 +9,6 @@ public interface BoardService {
 	// 서비스 계층의 이름은 "사용자 친화적으로" 작성
 	
 	public List<BoardDTO> findAllBoards();
-	
 	public BoardDTO findBoardByNo(int board_no);
 		/*
 			왜 BoardDTO 타입인가?
