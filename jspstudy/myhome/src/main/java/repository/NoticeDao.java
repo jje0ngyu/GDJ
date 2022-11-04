@@ -48,8 +48,4 @@ public class NoticeDao {
 		return notices;
 	}
 	
-	
-	
-	
-	
 }

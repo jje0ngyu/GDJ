@@ -1,0 +1,9 @@
+pom.xml 6장 복사
+web. xml 인코딩 필터
+모든 패키지 전체 복사
+뷰 전체 복사
+리소스 전체 복사
+
+------------------------
+
+webapp\META-INF\context.xml 이 있어야 Oracle에 접속이 가능하다.

@@ -47,13 +47,13 @@ public class NoticeController extends HttpServlet {
 		}
 		
 		// 어디로 어떻게 이동하는가?
-				if(af != null) {
-					if(af.isRedirect()) {
-						response.sendRedirect(af.getView());
-					} else {
-						request.getRequestDispatcher(af.getView()).forward(request, response);
-					}
-				}
+		if(af != null) {
+			if(af.isRedirect()) {
+				response.sendRedirect(af.getView());
+			} else {
+				request.getRequestDispatcher(af.getView()).forward(request, response);
+			}
+		}
 		
 	}
 

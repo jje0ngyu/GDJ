@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.app04.domain.Member;
 
 
+
+
 @RequestMapping("member") 		// URL Mapping이 member로 시작하는 모든 요청을 처리하는 컨트롤러
 @Controller
 public class MyController1 {
