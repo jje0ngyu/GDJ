@@ -1,0 +1,4 @@
+ IoC Container 란?
+ 		▷ Inversion of Control Container
+ 		▷ 콘테이너에 담을 가장 작은 코드부터 작업한다는 뜻
+ 

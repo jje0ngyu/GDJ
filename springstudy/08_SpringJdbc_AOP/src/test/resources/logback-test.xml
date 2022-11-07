@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<!-- logback 튜토리얼을 보고 작성한다. -->
+<!-- log4j 단어 들어간 흔적들 지우기  -->
+<configuration>
 
 	<!-- Appenders -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+	<!-- 
+		%data[패턴] : 로그기록시간(SimpleDateFormat과 동일한 패턴)
+		%thread     : 동작하는 스레드
+		%level		: 로그레벨(FATAL, ERROR, WARN, INFO, DEBUG, TRACE), %-5level은 5자리로 글자폭을 맞췄단 의미 (글자 수 부족한 것은 뒤에 공백을 줌)
+		%logger		: 로거이름(로그 찍는 클래스), %logger{36}는 최대 글자 수가 36자
+		%msg		: 로그메시지
+		%n			: ? 몰라
+		
+	 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%data{HH:mm:ss.SSS, Asia/Seoul} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
-	<logger name="com.gdu.app08">
-		<level value="info" />
-	</logger>
-	
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>	
-	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
-	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
-
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
+	<!-- 
+		로그레벨 (언제 로그가 찍힐 지? 상황)
+		
+		1.	FATAL : 프로그램이 종료될 수 있는 심각한 에러
+		2.	ERROR : FATAL보단 덜 심각한 에러
+		3.	WARN  : 잠재적 문제
+		4.	INFO  : 프로그램이 진행되는 상황
+		5.	DEBUG : 디버깅(*오류 수정)
+		6.	TRACE : DEBUG보다 세밀한 정보
+	 -->
 
 	<!-- Root Logger -->
-	<root>
-		<priority value="info" />
+	<root level="INFO">
 		<appender-ref ref="console" />
 	</root>
+	<!-- ref="console"은 상위 <appender>태그의 name 속성값이다. -->
 	
-</log4j:configuration>
+</configuration>

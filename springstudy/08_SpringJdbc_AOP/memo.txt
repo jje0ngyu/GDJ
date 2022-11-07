@@ -1,0 +1,6 @@
+11.07
+	1. LOGback을 사용하기 위해 pom.xml 에서 log4j 디펜던시 주석처리
+		logback은 메이븐레파지토리 에서 디펜던시 찾아서 pom.xml에 추가
+		(주소 : https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.2.3)
+		
+		

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.app08.domain.BoardDTO;
 import com.gdu.app08.service.BoardService;
 
+import lombok.AllArgsConstructor;
+
 // 필드를 이용한 생성자를 만들어 두면,
 // 생성자의 매개변수로 컨테이너의 Bean이 자동 주입(@Autowired)되므로
 // 필드에 @Autowired 처리할 필요가 없다.
@@ -19,6 +21,7 @@ import com.gdu.app08.service.BoardService;
  Advice    : 각 메소드 실행 이전에 파라미터값을 확인(check)
  ------------------------------------------------------------------------------- */
 
+@AllArgsConstructor
 @Controller
 public class BoardController {
 
