@@ -5,7 +5,7 @@
   
 <configuration>
 	
-	<!-- db.properties 파일 경로 설정 -->
+	<!-- mybatis.properties 파일 경로 설정 -->
 	<properties resource="mybatis/config/mybatis.properties"></properties>
 
 	<!-- snake_case(DB) ▷ camelCase(JAVA) -->
@@ -13,7 +13,7 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	
-	<!-- com.gdu.app09.domain.BoardDTO ▷ Board -->
+	<!-- com.gdu.app10.domain.BoardDTO ▷ Board -->
 	<typeAliases>
 		<typeAlias type="com.gdu.app10.domain.BoardDTO" alias="Board"/>
 	</typeAliases>
