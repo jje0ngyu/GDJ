@@ -1,6 +1,7 @@
 package com.gdu.app11.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,6 +10,9 @@ import com.gdu.app11.domain.EmpDTO;
 @Mapper
 public interface EmpMapper {
 	public int selectAllEmployeesCount();
-	public List<EmpDTO>	selectemployeesByPage(int begin, int end);
-											//#{param1}, #{param2}
+	public List<EmpDTO>	selectEmployeesByPage(Map<String, Object> map);
+	// 순번
+	public int selectFindEmployeesCount(Map<String, Object> map);
+	
+	public List<EmpDTO> selectFindEmployees(Map<String, Object> map);
 }
