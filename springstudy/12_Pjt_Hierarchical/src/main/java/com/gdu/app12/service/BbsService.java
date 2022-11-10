@@ -13,6 +13,5 @@ public interface BbsService {
 	//* ip를 알기 위해선 request가 필요.
 	
 	// 삭제
-	public int removeBbs(int bbsNo);
-	
+	public int removeBbs(int bbsNo);	
 }

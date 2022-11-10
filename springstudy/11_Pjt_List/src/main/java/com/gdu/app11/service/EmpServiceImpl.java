@@ -52,7 +52,7 @@ public class EmpServiceImpl implements EmpService {
 		// 뷰(view/list.jsp)로 보낼 데이터
 		model.addAttribute("employees", employees);
 		model.addAttribute("paging", pageUtil.getPaging(request.getContextPath() + "/emp/list"));
-		model.addAttribute("beginNo", totalRecord- (page-1) * pageUtil.getRecordPerPage());
+		model.addAttribute("beginNo", totalRecord - (page-1) * pageUtil.getRecordPerPage());
 		//* path 경로는 request에서 호출할 수 있다.
 	}
 	
@@ -114,7 +114,6 @@ public class EmpServiceImpl implements EmpService {
 		
 		List<EmpDTO> list = empMapper.selectAutoCompleteList(map);
 		
-		
 		Map<String, Object> result = new HashMap<String, Object>();
 		if(list.size() == 0) {
 			result.put("status", 400);
@@ -123,11 +122,6 @@ public class EmpServiceImpl implements EmpService {
 			result.put("status", 200);
 			result.put("list", list);
 		}
-		
-		
-		Map<String, Object> auto = new HashMap<String, Object>();
-		auto.put("target", request.getParameter("target"));
-		auto.put("param", request.getParameter("param"));
 		
 		switch(target) {
 		case "FIRST_NAME": result.put("target", "firstName"); break;

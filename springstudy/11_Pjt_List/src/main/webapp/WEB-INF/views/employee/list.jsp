@@ -85,6 +85,14 @@
 				}
 			});
 		});
+		if('${recordPerPage}' != ''){
+			$('#recordPerPage').val(${recordPerPage});
+		} else {
+			$('#recordPerPage').val(10);
+		}
+		$('#recordPerPage').change(function(){
+			location.href = '${contextPath}/bbs/recordPerPage=' + $(this).val();
+		});
 		
 	});
 	
@@ -127,6 +135,14 @@
 		</select>
 		<input type="text" id="param" name="param" list="auto_complete">
 		<datalist id="auto_complete"></datalist>
+	</div>
+	
+	<div>
+		<select name="recordPerPage" id="recordPerPage">
+			<option value="10">10</option>
+			<option value="15">15</option>
+			<option value="20">20</option>
+		</select>
 	</div>
 	
 	<hr>
