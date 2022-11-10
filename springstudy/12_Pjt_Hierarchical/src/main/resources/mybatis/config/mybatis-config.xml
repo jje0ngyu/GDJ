@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	
+	<!-- mybatis.properties 파일 경로 설정 -->
+	<properties resource="mybatis/config/mybatis.properties"></properties>
+
+	<!-- snake_case(DB) ▷ camelCase(JAVA) -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- com.gdu.app10.domain.BoardDTO ▷ Board -->
+	<typeAliases>
+		<typeAlias type="com.gdu.app12.domain.BbsDTO" alias="BbsDTO"/>
+	</typeAliases>
+	
+</configuration>

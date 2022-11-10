@@ -90,6 +90,12 @@
 		 WHERE B.RN BETWEEN #{begin} AND #{end}
 	</select>
 
+	<select id="selectAutoCompleteList" parameterType="Map" resultType="EmpDTO">
+		SELECT DISTINCT ${target}
+		  FROM EMPLOYEES
+		 WHERE ${target} LIKE CONCAT(#{param}, '%')
+	</select>
+	<!-- CONCAT(A,B) : A 와 B를 연결. 3가지 이상 연결은 안됨. CONCAT을 여러 번 사용해야 함 -->
 </mapper>
 
 	
