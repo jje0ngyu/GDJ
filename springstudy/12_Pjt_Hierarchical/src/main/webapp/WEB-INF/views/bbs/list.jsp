@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="${contextPath}/resources/js/jquery-3.6.1.min.js"></script>
+<style>
+	.blind {
+		display: none;
+	}
+</style>
 <script>
 	
 	$(function(){
@@ -56,9 +62,32 @@
 						<tr>
 							<td>${beginNo - vs.index}</td>
 							<td>${bbs.writer}</td>
-							<td>${bbs.title}</td>
+							<td>
+								<!-- depth에 따른 들여쓰기 -->
+								<c:forEach begin="1" end="${bbs.depth}" step="1">
+									&nbsp;&nbsp;
+								</c:forEach>
+								<!-- 답글은 [RE] 표시 -->
+								<c:if test="${bbs.depth > 0}" >
+									<span style="color:red;">[RE]</span>
+								</c:if>
+								<!-- 제목 -->
+								${bbs.title}
+								<!-- 답글달기 버튼 -->
+								<%-- 
+									1단 답글로 운용하는 경우 아래 코드를 추가한다
+								 	<c:if test="${bbs.depth == 0}"> --%>
+								<input type="button" value="답글" class="btn_reply_write">
+								<%-- </c:if --%>
+								<script>
+									$('.btn_reply_write').click(function(){
+										$('.reply_write_tr').addClass('blind');
+										$(this).parent().parent().next().removeClass('blind');
+									});
+								</script>
+							</td>
 							<td>${bbs.ip}</td>
-							<td>${bbs.createDate}</td>
+							<td><fmt:formatDate value="${bbs.createDate}" pattern="yy/MM/dd HH:mm:ss" /></td>
 							<td>
 								<!-- forEach 를 사용했기 때문에, id를 줬을 경우 동일한 아이디가 여러 개 생기므로, class로 부여한다. -->
 								<form method="post" action="${contextPath}/bbs/remove">
@@ -73,6 +102,18 @@
 									});
 								</script>
 							</td><!-- 폰트어썸 아이콘 사용해보기 -->
+						</tr>
+						<tr class="reply_write_tr blind">
+							<td colspan="6">
+								<form method="post" action="${contextPath}/bbs/reply/add">
+									<div><input type="text" name="writer" placeholder="작성자" required></div>
+									<div><input type="text" name="title" placeholder="제목" required></div>
+									<div><button>답글달기</button></div>
+									<input type="hidden" name="depth" value="${bbs.depth}">
+									<input type="hidden" name="groupNo" value="${bbs.groupNo}">
+									<input type="hidden" name="groupOrder" value="${bbs.groupOrder}">
+								</form>
+							</td>
 						</tr>
 					</c:if>
 					<c:if test="${bbs.state == 0}">

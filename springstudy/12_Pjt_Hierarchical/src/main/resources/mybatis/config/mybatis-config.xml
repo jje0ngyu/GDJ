@@ -15,7 +15,7 @@
 	
 	<!-- com.gdu.app10.domain.BoardDTO ▷ Board -->
 	<typeAliases>
-		<typeAlias type="com.gdu.app12.domain.BbsDTO" alias="BbsDTO"/>
+		<typeAlias type="com.gdu.app12.domain.BbsDTO" alias="BbsDTO" />
 	</typeAliases>
 	
 </configuration>

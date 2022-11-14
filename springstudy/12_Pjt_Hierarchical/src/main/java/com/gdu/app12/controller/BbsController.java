@@ -16,8 +16,7 @@ public class BbsController {
 
 	@Autowired
 	private BbsService bbsService;
-	
-	
+
 	@GetMapping("/")
 	public String welcome() {
 		return "index";
@@ -29,7 +28,7 @@ public class BbsController {
 		return "bbs/list";
 	}
 	
-	@GetMapping("bbs/write")
+	@GetMapping("/bbs/write")
 	public String write() {
 		return "bbs/write";
 	}
@@ -43,6 +42,12 @@ public class BbsController {
 	@PostMapping("/bbs/remove")
 	public String remove(@RequestParam("bbsNo") int bbsNo) {
 		bbsService.removeBbs(bbsNo);
+		return "redirect:/bbs/list";
+	}
+	
+	@PostMapping("/bbs/reply/add")
+	public String replyAdd(HttpServletRequest request) {
+		bbsService.addReply(request);
 		return "redirect:/bbs/list";
 	}
 	
