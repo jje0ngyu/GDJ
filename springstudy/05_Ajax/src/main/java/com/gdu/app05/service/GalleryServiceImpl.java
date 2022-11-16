@@ -6,7 +6,6 @@ public class GalleryServiceImpl implements GalleryService {
 
 	@Override
 	public ResponseEntity<byte[]> imageDisplay(String path, String filename) {
-		
 		return null;
 	}
 
