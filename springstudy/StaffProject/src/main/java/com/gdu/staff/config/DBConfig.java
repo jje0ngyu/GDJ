@@ -16,31 +16,30 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-
 @MapperScan(basePackages = {"com.gdu.staff.mapper"})
 @PropertySource(value = {"classpath:mybatis/config/mybatis.properties"})
 @EnableTransactionManagement
 @Configuration
 public class DBConfig {
-	
-	// db.properties 파일을 읽어서 변수에 저장하기
-	// ${프로퍼티명}
-	@Value (value = "${hikari.driver}")
+
+	@Value(value = "${hikari.driver}")
 	private String driver;
-	@Value (value = "${hikari.url}")
+	
+	@Value(value="${hikari.url}")
 	private String url;
-	@Value (value = "${hikari.username}")
+	
+	@Value(value="${hikari.username}")
 	private String username;
-	@Value (value = "${hikari.password}")
+	
+	@Value(value="${hikari.password}")
 	private String password;
 	
-	@Value(value = "${mapper.locations}")
+	@Value(value="${mapper.locations}")
 	private String mapperLocations;
-	@Value(value = "${config.location}")
+	
+	@Value(value="${config.location}")
 	private String configLocation;
 	
-	// HikariConfig
-	//* 환경설정
 	@Bean
 	public HikariConfig config() {
 		HikariConfig config = new HikariConfig();
@@ -48,17 +47,14 @@ public class DBConfig {
 		config.setJdbcUrl(url);
 		config.setUsername(username);
 		config.setPassword(password);
-		return config;		
+		return config;
 	}
 	
-	// HikariDataSource
-	@Bean(destroyMethod = "close")
+	@Bean(destroyMethod="close")
 	public HikariDataSource dataSource() {
 		return new HikariDataSource(config());
 	}
 	
-	// * 마이바티스 세팅 시작 --------------------------------------------------
-	// SqlSessionFactory
 	@Bean
 	public SqlSessionFactory factory() throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -68,12 +64,10 @@ public class DBConfig {
 		return bean.getObject();
 	}
 	
-	// SqlSessionTemplate  (*스프링에서 사용/ cf. 이클립스에서는 : SqlSession)
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
 		return new SqlSessionTemplate(factory());
 	}
-	
 	
 	@Bean
 	public TransactionManager transactionManager() {

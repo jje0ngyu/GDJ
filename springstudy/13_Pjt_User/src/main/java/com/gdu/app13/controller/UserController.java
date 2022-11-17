@@ -59,8 +59,6 @@ public class UserController {
 		return userService.sendAuthCode(email);
 	}
 	
-	
-	// HttpServletRequest, HttpServletResponse은 컨트롤러에서 선언하는 것이다!!!!!!!!!
 	@PostMapping("/user/join")
 	public void join(HttpServletRequest request, HttpServletResponse response) {
 		userService.join(request, response);
@@ -71,13 +69,14 @@ public class UserController {
 		userService.retire(request, response);
 	}
 	
-	// a 링크의 매핑값은 GetMapping!
 	@GetMapping("/user/login/form")
 	public String loginForm(HttpServletRequest request, Model model) {
 		
-		// 요청 헤더 referer : 이전 페이지의 주소
-		model.addAttribute("url", request.getHeader("referer"));	// 로그인 후 되돌아 갈 주소 url
+		// 요청 헤더 referer : 이전 페이지의 주소가 저장
+		model.addAttribute("url", request.getHeader("referer"));  // 로그인 후 되돌아 갈 주소 url
+		
 		return "user/login";
+		
 	}
 	
 	@PostMapping("/user/login")
@@ -87,17 +86,30 @@ public class UserController {
 	
 	@GetMapping("/user/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		request.getSession().invalidate();
+		userService.logout(request, response);
 		return "redirect:/";
 	}
 	
+	@GetMapping("/user/check/form")
+	public String requiredLogin_checkForm() {
+		return "user/check";
+	}
 	
+	@ResponseBody
+	@PostMapping(value="/user/check/pw", produces="application/json")
+	public Map<String, Object> requiredLogin_checkPw(HttpServletRequest request) {
+		return  userService.confirmPassword(request);
+	}
 	
+	@GetMapping("/user/mypage")
+	public String requiredLogin_mypage() {
+		return "user/mypage";
+	}
 	
-	
-	
-	
-	
+	@PostMapping("/user/modify/pw")
+	public void requiredLogin_modifyPw(HttpServletRequest request, HttpServletResponse response) {
+		userService.modifyPassword(request, response);
+	}
 	
 	
 	
