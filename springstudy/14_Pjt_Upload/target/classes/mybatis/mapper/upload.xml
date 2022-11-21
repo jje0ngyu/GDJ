@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdu.app14.mapper.UploadMapper">
+
+	<select id="selectUploadList" resultType="UploadDTO">
+		SELECT U.UPLOAD_NO, U.TITLE, U.CONTENT, U.CREATE_DATE, U.MODIFY_DATE, (SELECT COUNT(*) FROM ATTACH A WHERE U.UPLOAD_NO = A.UPLOAD_NO) AS ATTACH_CNT
+		  FROM UPLOAD U
+	</select>
+	
+	<insert id="insertUpload" parameterType="UploadDTO">
+		<!-- 시퀀스의 NEXTVAL 값이 궁금할 때 사용하는 태그 // 외래키 처리에 자주 사용된다.
+			selectKEY 의 값은 parameterType="UploadDTO"에 전달된다.
+			때문에 values 값으로 #{uploadNo}를 입력하면 된다.
+		-->
+		<selectKey keyProperty="uploadNo" resultType="int" order="BEFORE"> 
+			SELECT UPLOAD_SEQ.NEXTVAL 
+			  FROM DUAL
+		</selectKey>
+		INSERT INTO UPLOAD
+			(UPLOAD_NO, TITLE, CONTENT, CREATE_DATE, MODIFY_DATE)
+		VALUES
+			(#{uploadNo}, #{title}, #{content}, SYSTIMESTAMP, SYSTIMESTAMP)
+	</insert>
+	
+	<insert id="insertAttach" parameterType="AttachDTO">
+		INSERT INTO ATTACH
+			(ATTACH_NO, PATH, ORIGIN, FILESYSTEM, DOWNLOAD_CNT, UPLOAD_NO)
+		VALUES
+			(ATTACH_SEQ.NEXTVAL, #{path}, #{origin}, #{filesystem}, 0, #{uploadNo})
+	
+	</insert>
+	
+	
+</mapper>
