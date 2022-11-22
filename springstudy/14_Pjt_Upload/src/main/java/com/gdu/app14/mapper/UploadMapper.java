@@ -13,4 +13,9 @@ public interface UploadMapper {
 	public List<UploadDTO> selectUploadList();
 	public int insertUpload(UploadDTO upload);
 	public int insertAttach(AttachDTO attach);
+	public UploadDTO selectUploadByNo (int uploadNo);
+	public List<AttachDTO> selectAttachList (int uploadNo);	//* 첨부파일(attach)을 여러 개 등록할 수 있으므로 List 타입!
+	public int updateDownloadCnt (int attachNo);
+	public AttachDTO selectAttachByNo (int attachNo);
+	public int deleteAttachByAttachNo(int attachNo);
 }
