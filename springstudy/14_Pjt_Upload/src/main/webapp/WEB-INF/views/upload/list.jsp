@@ -12,9 +12,12 @@
 <body>
 
 	<div>
+
 		<div>
-			<a href="${contextPath}/upload/write">작성</a>		
-		</div><hr />
+			<a href="${contextPath}/upload/write">작성</a>
+		</div>
+		
+		<hr>
 		
 		<div>
 			<table border="1">
@@ -38,6 +41,7 @@
 				</tbody>
 			</table>
 		</div>
+		
 	</div>
 	
 </body>
