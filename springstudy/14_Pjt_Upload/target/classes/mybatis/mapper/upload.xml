@@ -66,6 +66,7 @@
 		 WHERE UPLOAD_NO = #{uploadNo}
 	</delete>
 	
+	<!-- CONCAT 은 연결함수 -->
 	<select id="selectAttachListInYesterday" resultType="AttachDTO">
 		SELECT ATTACH_NO, PATH, ORIGIN, FILESYSTEM, DOWNLOAD_CNT, UPLOAD_NO
 		  FROM ATTACH

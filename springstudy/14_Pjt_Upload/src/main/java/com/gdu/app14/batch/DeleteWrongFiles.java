@@ -55,6 +55,7 @@ public class DeleteWrongFiles {
 			@Override
 			public boolean accept(File dir, String name) {
 				return !pathList.contains(new File(dir, name).toPath());
+					//* 포함되어 있지 않은 것
 			}
 		});
 		
