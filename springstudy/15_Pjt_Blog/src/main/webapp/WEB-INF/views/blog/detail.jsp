@@ -8,6 +8,11 @@
 <jsp:include page="../layout/header.jsp">
 	<jsp:param value="${blog.blogNo}번 블로그" name="title"/>
 </jsp:include>
+<style>
+	.blind {
+		display : none;
+	}
+</style>
 
 <div>
 
@@ -56,7 +61,7 @@
 	
 	<hr />
 	
-	<div>
+	<div id="comment_area" class="blind">
 		<div id="comment_list"></div>
 		<div id="paging"></div>
 	</div>
@@ -76,11 +81,22 @@
 			<input type="hidden" name="blogNo" value="${blog.blogNo}">	
 		</form>
 	</div>
+	<!-- 현재 페이지 번호를 저장하고 있는 hidden -->
+	<input type="hidden" id="page" value="1">
+	
 	<script>
+		
+		// 전역 변수 page 	(모든 함수에서 사용 가능)
+		var page = 1;
+
+		// 함수 호출
 		fn_commentCount();
+		fn_switchCommentList();
 		fn_addComment();
 		fn_commentList();
-		
+		fn_changePage();
+	
+		// 함수 정의
 		function fn_commentCount(){
 			$.ajax({
 				type: 'get',
@@ -120,7 +136,7 @@
 			$.ajax({
 				type:'get',
 				url :'${contextPath}/comment/list',
-				data:'blogNo=${blog.blogNo}&page=1',	// 페이징 처리를 위해, 현재 page도 파라미터로 전달!
+				data:'blogNo=${blog.blogNo}&page=' + $('#page').val(),	// 페이징 처리를 위해, 현재 page도 파라미터로 전달!
 				dataType: 'json',
 				success : function(resData){
 					/* 
@@ -167,9 +183,43 @@
 						$('#comment_list').append('<div style="border-bottm: 1px dotted gray;"></div>')
 					});
 					// 페이징
-					
-				
+					$('#paging').empty();
+					var pageUtil = resData.pageUtil;
+					var paging ='';
+					// 이전 블록
+					if (pageUtil.beginPage != 1){
+						paging += '<span class="enable_link" data-page="' + (pageUtil.beginPage - 1) + '">◀</span>';
+					}
+					// 페이지번호
+					for (let p = pageUtil.beginPage; p <= pageUtil.endPage; p++){
+						if(p ==  $('#page').val()) {
+							paging += '<strong>' +p+ '</strong>';
+						} else {
+							paging += '<span class="enable_link" data-page="'+p+'">' + p + '</span>';
+						}
+					}
+					// 다음 블록
+					if(pageUtil.endPage != pageUtil.totalPage){
+						paging += '<span class="enable_link" data-page="' + (pageUtil.endPage + 1) + '">▶</span>';
+					}
+					// 화면에 뿌리기
+					$('#paging').append(paging);
 				}
+			});
+		}
+		
+		function fn_changePage(){
+			// 자바스크립트로 만든 아이들은 아래와 같은 코드로 작동시켜야한다. (동적요소는 일반 클릭이벤트로 이동하지 않는다.)
+			// $(만들어져있었던부모).on('click', '.enable_link', (function(){ }));
+			$(document).on('click', '.enable_link', function(){
+				$('#page').val( $(this).data('page') );
+				fn_commentList();
+			})
+		}
+		
+		function fn_switchCommentList(){
+			$('#btn_comment_list').click(function(){
+				$('#comment_area').toggleClass('blind');
 			});
 		}
 	</script>
