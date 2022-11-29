@@ -95,7 +95,10 @@
 		fn_addComment();
 		fn_commentList();
 		fn_changePage();
-	
+		fn_removeComment();
+		fn_switchReplyArea();
+		fn_addReply();
+		
 		// 함수 정의
 		function fn_commentCount(){
 			$.ajax({
@@ -107,7 +110,7 @@
 					$('#comment_count').text(resData.commentCount);
 				}
 			});
-		}
+		};
 		
 		function fn_addComment(){
 			$('#btn_add_comment').click(function(){
@@ -130,7 +133,7 @@
 					}
 				});
 			});
-		}
+		};
 		
 		function fn_commentList(){
 			$.ajax({
@@ -161,10 +164,16 @@
 						if(comment.depth == 0){
 							div += '<div>';
 						} else {
-							div += '<div style="margin-left: 40px;">;'
+							div += '<div style="margin-left: 40px;">';
 						}
 						if (comment.state == 1) {
-							div += '<div>' + comment.content + '</div>';
+							div += '<div>' + comment.content;
+							// 작성자만 삭제할 수 있도록 if 처리 필요
+							div += '<input type="button" value="삭제" class="btn_comment_remove" data-comment_no="' + comment.commentNo + '">'; 
+							if(comment.depth == 0){
+								div += '<input type="button" value="답글" class="btn_reply_area">';
+							}
+							div += '</div>';
 						} else {
 							if(comment.depth == 0){
 								div += '<div>삭제된 댓글입니다.</div>';
@@ -178,9 +187,19 @@
 						moment.locale('ko-KR');
 						div += '<span style="font-size: 12px; color:silver;">'+ moment(comment.createDate).format('YYYY.MM.DD hh:mm') + '</span>';
 						div += '</div>';
+							// 답글 reply
+							div += '<div style="margin-left: 40px;" class="reply_area blind">';
+								div += '<form class="frm_reply">';
+								div += '<input type="hidden" name="blogNo" value="' + comment.blogNo + '">';
+								div += '<input type="hidden" name="groupNo" value="' + comment.commentNo + '">';
+								div += '<input type="text" name="content" placeholder="답글을 작성하려면 로그인을 해주세요">';
+								// 로그인한 사용자만 볼 수 있도록 if 처리
+								div += '<input type="button" value="답글작성완료" class="btn_reply_add">';
+								div += '</form>';
+							div += '</div>';
 						div += '</div>';
 						$('#comment_list').append(div);
-						$('#comment_list').append('<div style="border-bottm: 1px dotted gray;"></div>')
+						$('#comment_list').append('<div style="border-bottm: 1px dotted gray;"></div>');
 					});
 					// 페이징
 					$('#paging').empty();
@@ -193,7 +212,7 @@
 					// 페이지번호
 					for (let p = pageUtil.beginPage; p <= pageUtil.endPage; p++){
 						if(p ==  $('#page').val()) {
-							paging += '<strong>' +p+ '</strong>';
+							paging += '<strong>' + p + '</strong>';
 						} else {
 							paging += '<span class="enable_link" data-page="'+p+'">' + p + '</span>';
 						}
@@ -206,7 +225,7 @@
 					$('#paging').append(paging);
 				}
 			});
-		}
+		};
 		
 		function fn_changePage(){
 			// 자바스크립트로 만든 아이들은 아래와 같은 코드로 작동시켜야한다. (동적요소는 일반 클릭이벤트로 이동하지 않는다.)
@@ -215,13 +234,62 @@
 				$('#page').val( $(this).data('page') );
 				fn_commentList();
 			})
-		}
+		};
 		
 		function fn_switchCommentList(){
 			$('#btn_comment_list').click(function(){
 				$('#comment_area').toggleClass('blind');
 			});
-		}
+		};
+		
+		function fn_removeComment(){
+			$(document).on('click', '.btn_comment_remove', function(){
+				if(confirm('삭제된 댓글은 복수할 수 없습니다. 댓글을 삭제할까요?')){
+					$.ajax({
+						type: 'post',
+						url : '${contextPath}/comment/remove',
+						data: 'commentNo=' + $(this).data('comment_no'),
+						dataType: 'json',
+						success : function(resData){	// resData = {"isRemove" : true}
+							if(resData.isRemove) {
+								alert('댓글이 삭제되었습니다.');
+								fn_commentList();  // 목록 갱신
+								fn_commentCount(); // 개수 갱신
+							}
+						}
+					});
+				}
+			});
+			
+		};
+		
+		function fn_switchReplyArea(){
+			$(document).on('click', '.btn_reply_area', function(){
+				$(this).parent().next().next().toggleClass('blind');
+			});
+		};
+		
+		function fn_addReply() {
+			$(document).on('click', '.btn_reply_add', function(){
+				if($(this).prev().val() == ''){
+					alert('답글 내용을 입력하세요.');
+					return;
+				}
+				$.ajax({
+					type: 'post',
+					url : '${contextPath}/comment/reply/add',
+					data: $(this).closest('.frm_reply').serialize(), // 이건 사용 안 됩니다. $('.frm_reply').serialize(),
+					dataType: 'json',
+					success : function(resData){	// resData = {"isAdd", true}
+						if(resData.isAdd){
+							alert('답글이 등록되었습니다.');
+							fn_commentList();  // 목록 갱신
+							fn_commentCount(); // 개수 갱신
+						}
+					}
+				});
+			});
+		};
 	</script>
 	
 	

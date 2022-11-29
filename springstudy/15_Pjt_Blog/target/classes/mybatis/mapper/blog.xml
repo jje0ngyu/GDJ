@@ -65,4 +65,19 @@
 		SELECT BLOG_NO, FILESYSTEM
 		  FROM SUMMERNOTE_IMAGE
 	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
