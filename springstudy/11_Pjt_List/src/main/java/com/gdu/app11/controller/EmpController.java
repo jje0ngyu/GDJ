@@ -23,21 +23,29 @@ public class EmpController {
 		return "index";
 	}
 	
-	@GetMapping("/emp/list") //* = emp/list   맨 앞 슬래시는 생략가능
+	@GetMapping("/emp/change/list")
+	public String changeList(HttpServletRequest request, int recordPerPage) {
+		// 세션에 recordPerPage를 변경해서 올린 뒤 다시 목록으로 돌아감
+		request.getSession().setAttribute("recordPerPage", recordPerPage);
+		return "redirect:" + request.getHeader("referer");
+	}
+	
+	@GetMapping("/emp/list")
 	public String list(HttpServletRequest request, Model model) {
-		empService.findAllEmployees(request, model);
+		empService.getAllEmployees(request, model);
 		return "employee/list";
 	}
 	
+	@ResponseBody
+	@GetMapping(value="/emp/autoComplete", produces="application/json")
+	public Map<String, Object> autoComplete(HttpServletRequest request) {
+		return empService.getAutoCompleteList(request);
+	}
+
 	@GetMapping("/emp/search")
 	public String search(HttpServletRequest request, Model model) {
 		empService.findEmployees(request, model);
 		return "employee/list";
 	}
 	
-	@ResponseBody // ajax일 때 사용
-	@GetMapping(value="/emp/autoComplete", produces = "application/json")
-	public Map<String, Object> autoComplete(HttpServletRequest request) {
-		return empService.findAutoCompleteList(request);
-	}
 }
