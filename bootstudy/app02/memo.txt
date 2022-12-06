@@ -1,0 +1,14 @@
+1. src에 있던 정적 자원들 위치 변화
+	- src/main/resources
+ 	- jsp 사용하지 않음 -> 전부 html로 변화
+
+2. webApp 에 있던 resources는 static 폴더에 저장
+3. views 에 있던 jsp는 templates 폴더에 저장
+	- 이후 확장자를 jsp -> html 로 변경
+	- 자바 관련 용어는 사용 불가
+		- <%@> 태그
+		- <c> 태그
+	- <html> 태그에 속성 추가
+		-타임리프 사용하기 위해서 html태그에 속성 부여 필수
+		-<html xmlns:th="http://www.thymeleaf.org">
+ 

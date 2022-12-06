@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- 타임리프 사용하기 위해서 html태그에 속성 부여 필수 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- static 폴더 이후의 위치를 적으면 된다. -->
+<script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+</head>
+<body>
+
+	<!-- thymeleaf 속성은 th: 으로 시작한다. -->
+	<!-- Link URL Expression : @{} -->
+	<!--
+		일반 a링크
+		<a href="${ContextPath}/blog/list">블로그</a>	
+	-->
+	<!-- 타임리프 속성 -->
+	<a th:href="@{/blog/list}">블로그</a>
+	
+	
+</body>
+</html>

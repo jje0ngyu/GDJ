@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<h1>블로그 목록 (전체 ${totalRecord}개)</h1>
+	<div>
+		<!--
+		<input type="button" value="블로그 작성하기" onclick="location.href='${contextPath}/blog/write'">
+		이벤트 속성은 스크립트로 작성해야 한다.
+		-->
+		<input type="button" value="블로그 작성하기" id="btn_write">
+		<!-- 자바스크립트 내부에서 thymeleaf의 expression 사용을 위해서 th:inline="javascript" 속성을 사용한다. -->
+		<script th:inline="javascript">
+			/* thymeleaf의 expression은 대괄호([]) 2개인 [[]]로 묶는다. */
+			$('#btn_write').click(function(){
+				location.href = [[@{/blog/write}]];
+			});
+		</script>
+	</div>
+	
+	<div>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>순번</td>
+					<td>제목</td>
+					<td>조회수</td>
+					<td>작성일</td>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <c:forEach> 태그를 thymeleaf 속성으로 바꾸기
+					<c:forEach items="${blogList}" var="blog" varStatus="vs">
+							<tr>
+								<td>${beginNo - vs.index}</td>
+								<td><a href="${contextPath}/blog/increse/hit?blogNo=${blog.blogNo}" >${blog.title}</a></td>
+								<td>${blog.hit}</td>
+								<td>${blog.createDate}</td>
+							</tr>
+					<c:forEach>
+				-->
+				<!-- Variable Expression : ${}
+					변수 값을 불러 올 때는 EL 과 형태가 똑같다.
+				-->
+				<tr th:each="blog,rowStat:${blogList}">
+					<td th:text="${beginNo - rowStat.index}"></td>
+					<!-- <td>${beginNo - rowStat.index}</td> -->
+					
+					<!--
+					<td><a href="${contextPath}/blog/increse/hit?blogNo=${blog.blogNo}" >${blog.title}</a></td>
+					-->
+					<!-- thymeleaf에서 파라미터를 전달하는 법 : 파라미터부분을 괄호()로 감싸준다. 	(물음표(?) 사용 x) -->
+					<td><a th:href="@{/blog/increse/hit(blogNo=${blog.blogNo})}" >${blog.title}</a></td>
+					<td><a th:href="@{/blog/increse/hit(blogNo=${blog.blogNo})}" th:text="${blog.title}"></a></td>
+					<td th:text="${blog.hit}"></td>
+					<td th:text="${blog.createDate}"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<!-- 주의
+						<td colspan="4" th:text="${paging}">
+						사용불가! why? paging 안에 태그가 존재 (<a>태그)
+						
+						이럴 경우 th:utext 사용! (아래에 사용 예시)
+					-->
+					<!-- th:utext="HTML 구성요소 포함한 텍스트" -->
+					<td colspan="4" th:utext="${paging}">
+						
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+</body>
+</html>
