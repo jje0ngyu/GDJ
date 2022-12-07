@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 타임리프 사용하기 위해서 html태그에 속성 부여 필수 -->
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{layout/header::head('환영합니다')}"></head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- static 폴더 이후의 위치를 적으면 된다. -->
