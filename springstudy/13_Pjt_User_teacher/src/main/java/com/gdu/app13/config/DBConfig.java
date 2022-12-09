@@ -17,12 +17,11 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @MapperScan(basePackages = {"com.gdu.app13.mapper"})
-@PropertySource(value = {"classpath:mybatis/config/mybatis.properties"})
+@PropertySource(value = {"classpath:application.properties"})
 @EnableTransactionManagement
 @Configuration
 public class DBConfig {
-	// db.properties 파일을 읽어서 변수에 저장하기
-	// ${프로퍼티명}
+	
 	@Value(value = "${spring.datasource.hikari.driver-class-name}")
 	private String driverClassName;
 	
