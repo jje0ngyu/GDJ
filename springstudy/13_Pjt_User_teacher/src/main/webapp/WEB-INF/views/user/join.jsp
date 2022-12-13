@@ -107,13 +107,16 @@
 		
 		$('#re_pw').keyup(function(){
 			
+			$('#msg_re_pw').empty();
+			
 			// 입력한 비밀번호 확인
 			let rePwValue = $(this).val();
 			
 			// 비밀번호와 비밀번호 재입력 검사
-			if(rePwValue != '' && rePwValue != $('#pw').val()){
-				$('#msg_re_pw').text('비밀번호를 확인하세요.');
+			if(rePwValue == '' || rePwValue != $('#pw').val()){
+				$('#msg_re_pw').text('불일치');
 				rePwPass = false;
+				
 			} else {
 				$('#msg_re_pw').text('');
 				rePwPass = true;
@@ -325,8 +328,12 @@
 				alert('아이디를 확인하세요.');
 				event.preventDefault();
 				return;
-			} else if(pwPass == false || rePwPass == false){
+			} else if(pwPass == false){
 				alert('비밀번호를 확인하세요.');
+				event.preventDefault();
+				return;
+			} else if(rePwPass == false) {
+				alert('비밀번호 재확인을 확인하세요');
 				event.preventDefault();
 				return;
 			} else if(namePass == false){

@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService {
 		// 그래야 사용자가 입력한 인증코드와 비교를 할 수 있음
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("authCode", authCode);
+		System.out.println(result);
 		return result;
 		
 	}
